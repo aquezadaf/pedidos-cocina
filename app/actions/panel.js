@@ -1,0 +1,2 @@
+export const AGREGAR_PEDIDO = "AGREGAR_PEDIDO";
+export const ELIMINAR_PEDIDO = "ELIMINAR_PEDIDO";
