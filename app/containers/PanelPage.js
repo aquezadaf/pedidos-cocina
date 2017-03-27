@@ -7,4 +7,4 @@ function mapStateToProps(state) {
   };
 }
 
-export default connect(mapStateToProps, null, Panel);
+export default connect(mapStateToProps, null)(Panel);
