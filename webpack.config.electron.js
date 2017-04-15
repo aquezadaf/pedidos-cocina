@@ -1,21 +1,21 @@
 /**
- * Build config for electron 'Main Process' file
+ * Build config for electron "Main Process" file
  */
 
-import webpack from 'webpack';
-import merge from 'webpack-merge';
-import BabiliPlugin from 'babili-webpack-plugin';
-import baseConfig from './webpack.config.base';
+import webpack from "webpack";
+import merge from "webpack-merge";
+import BabiliPlugin from "babili-webpack-plugin";
+import baseConfig from "./webpack.config.base";
 
 export default merge(baseConfig, {
-  devtool: 'source-map',
+  devtool: "source-map",
 
-  entry: ['babel-polyfill', './app/main.development'],
+  entry: ["babel-polyfill", "./app/main.development"],
 
-  // 'main.js' in root
+  // "main.js" in root
   output: {
     path: __dirname,
-    filename: './app/main.js'
+    filename: "./app/main.js"
   },
 
   plugins: [
@@ -34,7 +34,7 @@ export default merge(baseConfig, {
      * development checks
      */
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
+      "process.env.NODE_ENV": JSON.stringify("production")
     })
   ],
 
@@ -42,7 +42,7 @@ export default merge(baseConfig, {
    * Set target to Electron specific node.js env.
    * https://github.com/chentsulin/webpack-target-electron-renderer#how-this-module-works
    */
-  target: 'electron-main',
+  target: "electron-main",
 
   /**
    * Disables webpack processing of __dirname and __filename.

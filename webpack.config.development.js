@@ -3,23 +3,23 @@
  * Build config for development process that uses Hot-Module-Replacement
  * https://webpack.js.org/concepts/hot-module-replacement/
  */
-import path from 'path';
-import webpack from 'webpack';
-import merge from 'webpack-merge';
-import { spawn } from 'child_process';
-import baseConfig from './webpack.config.base';
+import path from "path";
+import webpack from "webpack";
+import merge from "webpack-merge";
+import { spawn } from "child_process";
+import baseConfig from "./webpack.config.base";
 
 const port = process.env.PORT || 3000;
 const publicPath = `http://localhost:${port}/dist`;
 
 export default merge(baseConfig, {
-  devtool: 'inline-source-map',
+  devtool: "inline-source-map",
 
   entry: [
-    'react-hot-loader/patch',
+    "react-hot-loader/patch",
     `webpack-dev-server/client?http://localhost:${port}/`,
-    'webpack/hot/only-dev-server',
-    path.join(__dirname, 'app/index.js'),
+    "webpack/hot/only-dev-server",
+    path.join(__dirname, "app/index.js"),
   ],
 
   output: {
@@ -31,9 +31,9 @@ export default merge(baseConfig, {
       {
         test: /\.global\.css$/,
         use: [
-          { loader: 'style-loader' },
+          { loader: "style-loader" },
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               sourceMap: true,
             },
@@ -43,14 +43,14 @@ export default merge(baseConfig, {
       {
         test: /^((?!\.global).)*\.css$/,
         use: [
-          { loader: 'style-loader' },
+          { loader: "style-loader" },
           {
-            loader: 'css-loader',
+            loader: "css-loader",
             options: {
               modules: true,
               sourceMap: true,
               importLoaders: 1,
-              localIdentName: '[name]__[local]__[hash:base64:5]',
+              localIdentName: "[name]__[local]__[hash:base64:5]",
             }
           },
         ]
@@ -58,50 +58,50 @@ export default merge(baseConfig, {
       {
         test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
         use: {
-          loader: 'url-loader',
+          loader: "url-loader",
           options: {
             limit: 10000,
-            mimetype: 'application/font-woff',
+            mimetype: "application/font-woff",
           }
         },
       },
       {
         test: /\.woff2(\?v=\d+\.\d+\.\d+)?$/,
         use: {
-          loader: 'url-loader',
+          loader: "url-loader",
           options: {
             limit: 10000,
-            mimetype: 'application/font-woff',
+            mimetype: "application/font-woff",
           }
         }
       },
       {
         test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
         use: {
-          loader: 'url-loader',
+          loader: "url-loader",
           options: {
             limit: 10000,
-            mimetype: 'application/octet-stream'
+            mimetype: "application/octet-stream"
           }
         }
       },
       {
         test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
-        use: 'file-loader',
+        use: "file-loader",
       },
       {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
         use: {
-          loader: 'url-loader',
+          loader: "url-loader",
           options: {
             limit: 10000,
-            mimetype: 'image/svg+xml',
+            mimetype: "image/svg+xml",
           }
         }
       },
       {
         test: /\.(?:ico|gif|png|jpg|jpeg|webp)$/,
-        use: 'url-loader',
+        use: "url-loader",
       }
     ]
   },
@@ -120,9 +120,9 @@ export default merge(baseConfig, {
      * development checks
      */
     new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('development'),
-        WEBSOCKET_URL: JSON.stringify('ws://localhost:8080/')
+      "process.env": {
+        NODE_ENV: JSON.stringify("development"),
+        WEBSOCKET_URL: JSON.stringify("ws://localhost:8080/")
       }
     }),
     // turn debug mode on.
@@ -134,19 +134,19 @@ export default merge(baseConfig, {
   /**
    * https://github.com/chentsulin/webpack-target-electron-renderer#how-this-module-works
    */
-  target: 'electron-renderer',
+  target: "electron-renderer",
   devServer: {
     port,
     hot: true,
     inline: false,
     historyApiFallback: true,
-    contentBase: path.join(__dirname, 'dist'),
+    contentBase: path.join(__dirname, "dist"),
     publicPath,
     setup() {
       if (process.env.START_HOT) {
-        spawn('npm', ['run', 'start-hot'], { shell: true, env: process.env, stdio: 'inherit' })
-          .on('close', code => process.exit(code))
-          .on('error', spawnError => console.error(spawnError));
+        spawn("npm", ["run", "start-hot"], { shell: true, env: process.env, stdio: "inherit" })
+          .on("close", code => process.exit(code))
+          .on("error", spawnError => console.error(spawnError));
       }
     }
   },
