@@ -120,7 +120,10 @@ export default merge(baseConfig, {
      * development checks
      */
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development')
+      'process.env': {
+        NODE_ENV: JSON.stringify('development'),
+        WEBSOCKET_URL: JSON.stringify('ws://localhost:8080/')
+      }
     }),
     // turn debug mode on.
     new webpack.LoaderOptionsPlugin({

@@ -1,6 +1,6 @@
 import io from "socket.io-client";
 
-const socket = io("http://localhost:8080");
+const socket = io(process.env.WEBSOCKET_URL);
 
 export function onConnect(cb) {
   socket.on("connect", cb);
