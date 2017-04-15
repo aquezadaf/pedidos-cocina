@@ -1,8 +1,14 @@
 import React, { Component } from "react";
 
 export default class Panel extends Component {
+  constructor(props) {
+    super(props);
+    props.subscribirCambiosPanel();
+  }
+
   props: {
-    pedidos: []
+    pedidos: [],
+    subscribirCambiosPanel: () => void
   }
 
   render() {
