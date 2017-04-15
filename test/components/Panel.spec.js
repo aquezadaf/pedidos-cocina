@@ -10,10 +10,11 @@ function setup() {
     }, {
       id: 2,
       nombre: "Pedido 2"
-    }]
+    }],
+    subscribirCambiosPanel: () => { }
   };
 
-  const panelEnzyme = shallow(<Panel pedidos={props.pedidos} />);
+  const panelEnzyme = shallow(<Panel {...props} />);
 
   return {
     panelEnzyme
