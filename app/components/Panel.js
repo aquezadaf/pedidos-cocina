@@ -20,7 +20,13 @@ export default class Panel extends Component {
         <h1 className={style.titulo}>Panel pedidos</h1>
         <div className={style.pedidos}>
           {
-            pedidos.map((pedido) => <Pedido key={pedido.id} nombre={pedido.nombre} />)
+            pedidos.map((pedido) => (
+              <Pedido
+                key={pedido.id}
+                nombre={pedido.nombre}
+                fechaSolicitud={pedido.fechaSolicitud}
+              />
+            ))
           }
         </div>
       </div>

@@ -3,14 +3,20 @@ import style from "./Pedido.css";
 
 export default class Pedido extends Component {
   props: {
-    nombre: string
+    nombre: string,
+    fechaSolicitud: Date
   }
 
   render() {
-    const { nombre } = this.props;
+    const { nombre, fechaSolicitud } = this.props;
     return (
       <div className={style.pedido}>
-        {nombre}
+        <div>
+          {nombre}
+        </div>
+        <div>
+          {fechaSolicitud}
+        </div>
       </div>
     );
   }
