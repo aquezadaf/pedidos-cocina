@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import style from "./Panel.css";
 
 export default class Panel extends Component {
   constructor(props) {
@@ -14,13 +15,17 @@ export default class Panel extends Component {
   render() {
     const { pedidos } = this.props;
     return (
-      <div>
-        <h1>Panel pedidos</h1>
-        <ul>
+      <div className={style.panel}>
+        <h1 className={style.titulo}>Panel pedidos</h1>
+        <div className={style.pedidos}>
           {
-            pedidos.map((pedido) => <li key={pedido.id}>{pedido.nombre}</li>)
+            pedidos.map((pedido) => (
+              <div key={pedido.id} className={style.pedido}>
+                {pedido.nombre}
+              </div>
+            ))
           }
-        </ul>
+        </div>
       </div>
     );
   }

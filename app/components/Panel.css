@@ -1,0 +1,24 @@
+.panel {
+  background-color: lightsteelblue;
+}
+
+.titulo {
+  color: white;
+}
+
+.pedidos {
+  background-color: tomato;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.pedido {
+  background-color: lightcoral;
+  color: white;
+  padding: 20px;
+  margin: 10px;
+  font-size: 17px;
+  font-weight: bold;
+  border-radius: 15px;
+  border: 2px solid white;
+}
