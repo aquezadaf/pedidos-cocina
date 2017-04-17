@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Pedido from "./Pedido";
 import style from "./Panel.css";
 
 export default class Panel extends Component {
@@ -19,11 +20,7 @@ export default class Panel extends Component {
         <h1 className={style.titulo}>Panel pedidos</h1>
         <div className={style.pedidos}>
           {
-            pedidos.map((pedido) => (
-              <div key={pedido.id} className={style.pedido}>
-                {pedido.nombre}
-              </div>
-            ))
+            pedidos.map((pedido) => <Pedido key={pedido.id} nombre={pedido.nombre} />)
           }
         </div>
       </div>
