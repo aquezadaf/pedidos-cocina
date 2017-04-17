@@ -21,7 +21,7 @@ describe("Reducer panel", () => {
     expect(panel(pedidos, { type: AGREGAR_PEDIDO, pedido: nuevoPedido }))
       .toEqual(pedidosEditados);
   });
-  it("ELiminar un pedido al ejecutar ELIMINAR_PEDIDO", () => {
+  it("Eliminar un pedido al ejecutar ELIMINAR_PEDIDO", () => {
     const pedidos = [{
       id: 1,
       nombre: "Pedido 1"
@@ -32,7 +32,7 @@ describe("Reducer panel", () => {
       id: 3,
       nombre: "Pedido 3"
     }];
-    const indicePedidoEliminar = 1;
+    const idPedidoEliminar = 2;
     const pedidosEditados = [{
       id: 1,
       nombre: "Pedido 1"
@@ -40,7 +40,7 @@ describe("Reducer panel", () => {
       id: 3,
       nombre: "Pedido 3"
     }];
-    expect(panel(pedidos, { type: ELIMINAR_PEDIDO, indice: indicePedidoEliminar }))
+    expect(panel(pedidos, { type: ELIMINAR_PEDIDO, id: idPedidoEliminar }))
       .toEqual(pedidosEditados);
   });
 });

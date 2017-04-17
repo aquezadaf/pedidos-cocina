@@ -8,10 +8,7 @@ export default function panel(state = [], action) {
         action.pedido
       ];
     case ELIMINAR_PEDIDO:
-      return [
-        ...state.slice(0, action.indice),
-        ...state.slice(action.indice + 1)
-      ];
+      return state.filter((pedido) => action.id !== pedido.id);
     default:
       return state;
   }

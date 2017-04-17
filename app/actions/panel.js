@@ -10,10 +10,10 @@ export function agregarPedido(pedido) {
   };
 }
 
-export function eliminarPedido(indice) {
+export function eliminarPedido(id) {
   return {
     type: ELIMINAR_PEDIDO,
-    indice
+    id
   };
 }
 

@@ -11,12 +11,12 @@ describe("Acciones panel", () => {
       .toEqual(accionGenerada);
   });
   it("Eliminar pedido debe generar accion eliminar pedido", () => {
-    const indice = 1;
+    const id = 1;
     const accionGenerada = {
       type: accionesPanel.ELIMINAR_PEDIDO,
-      indice
+      id
     };
-    expect(accionesPanel.eliminarPedido(indice))
+    expect(accionesPanel.eliminarPedido(id))
       .toEqual(accionGenerada);
   });
 });
