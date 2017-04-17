@@ -27,7 +27,7 @@ describe("Componenete Panel", () => {
   });
   it("La cantidad de elementos en la liste debe ser igual a los pedidos ", () => {
     const panelEnzyme = crearPanel();
-    expect(panelEnzyme.find("div > div > div").length)
+    expect(panelEnzyme.find("Pedido").length)
       .toBe(2);
   });
 });
