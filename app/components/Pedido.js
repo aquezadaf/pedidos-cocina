@@ -11,10 +11,10 @@ export default class Pedido extends Component {
     const { nombre, fechaSolicitud } = this.props;
     return (
       <div className={style.pedido}>
-        <div>
+        <div className={style.detalle}>
           {nombre}
         </div>
-        <div>
+        <div className={style.fecha}>
           {fechaSolicitud}
         </div>
       </div>

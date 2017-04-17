@@ -1,13 +1,15 @@
 .panel {
-  background-color: lightsteelblue;
+  background-color: rgb(192, 164, 128);
 }
 
 .titulo {
   color: white;
+  text-align: center;
+  padding-top: 10px;
 }
 
 .pedidos {
-  background-color: tomato;
+  background-color: rgb(226, 214, 191);
   display: flex;
   flex-wrap: wrap;
 }
