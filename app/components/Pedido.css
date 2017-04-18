@@ -3,14 +3,14 @@
   color: white;
   font-size: 17px;
   font-weight: bold;
-  border-radius: 15px;
+  border-radius: 0px 0px 15px 15px;
   border: 2px solid white;
   margin: 10px;
   box-shadow: 2px 2px 2px gray;
 }
 
-.detalle {
-  padding-top: 10px;
+.nombre {
+  padding-top: 5px;
   text-align: center;
 }
 
@@ -20,4 +20,12 @@
   padding: 5px;
   border-radius: 0px 0px 15px 15px;
   padding: 8px;
+}
+
+.ordenes {
+  padding: 10px;
+}
+
+.orden {
+  text-align: center;
 }

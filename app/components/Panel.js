@@ -25,6 +25,7 @@ export default class Panel extends Component {
                 key={pedido.id}
                 nombre={pedido.nombre}
                 fechaSolicitud={pedido.fechaSolicitud}
+                ordenes={pedido.ordenes}
               />
             ))
           }
