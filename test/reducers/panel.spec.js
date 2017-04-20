@@ -66,4 +66,19 @@ describe("Reducer panel", () => {
     expect(panel(pedidos, { type: AUMENTAR_PRIORIDAD_PEDIDO, id: idPedidoPrioridad }))
       .toEqual(pedidosEditados);
   });
+  it("No debe agregar un pedido si es que el id existe en el store", () => {
+    const pedidos = [{
+      id: 1,
+      nombre: "Pedido 1"
+    }, {
+      id: 2,
+      nombre: "Pedido 2"
+    }];
+    const nuevoPedido = {
+      id: 2,
+      nombre: "Pedido 2"
+    };
+    expect(panel(pedidos, { type: AGREGAR_PEDIDO, pedido: nuevoPedido }))
+      .toEqual(pedidos);
+  });
 });
