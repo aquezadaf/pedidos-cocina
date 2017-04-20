@@ -18,15 +18,21 @@ export default class Panel extends Component {
     subscribirCambiosPanel: () => void
   }
 
-  render() {
+  pedidosOrdenados() {
     const { pedidos } = this.props;
+    // Se clona los pedidos para no modificarlos con sort
+    return []
+      .concat(pedidos)
+      .sort(Panel.compararPrioridadPedidos);
+  }
+
+  render() {
     return (
       <div className={style.panel}>
         <h1 className={style.titulo}>Panel pedidos</h1>
         <FlipMove className={style.pedidos} duration={500} easing="ease-out">
           {
-            pedidos
-              .sort(Panel.compararPrioridadPedidos)
+            this.pedidosOrdenados()
               .map((pedido) => (
                 <Pedido
                   key={pedido.id}
