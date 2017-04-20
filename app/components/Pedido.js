@@ -4,16 +4,17 @@ import style from "./Pedido.css";
 export default class Pedido extends Component {
   props: {
     nombre: string,
+    prioridad: number,
     fechaSolicitud: Date,
     ordenes: Array
   }
 
   render() {
-    const { nombre, fechaSolicitud, ordenes } = this.props;
+    const { nombre, fechaSolicitud, ordenes, prioridad } = this.props;
     return (
       <div className={style.pedido}>
         <div className={style.nombre}>
-          {nombre}
+          ({prioridad}) {nombre}
         </div>
         <div className={style.ordenes}>
           {

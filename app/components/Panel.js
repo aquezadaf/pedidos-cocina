@@ -37,6 +37,7 @@ export default class Panel extends Component {
                 <Pedido
                   key={pedido.id}
                   nombre={pedido.nombre}
+                  prioridad={pedido.prioridad}
                   fechaSolicitud={pedido.fechaSolicitud}
                   ordenes={pedido.ordenes}
                 />
