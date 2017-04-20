@@ -4,6 +4,10 @@ import Pedido from "./Pedido";
 import style from "./Panel.css";
 
 export default class Panel extends Component {
+  static compararPrioridadPedidos(primerPedido, segundoPedido) {
+    return segundoPedido.prioridad - primerPedido.prioridad;
+  }
+
   constructor(props) {
     super(props);
     props.subscribirCambiosPanel();
@@ -21,14 +25,16 @@ export default class Panel extends Component {
         <h1 className={style.titulo}>Panel pedidos</h1>
         <FlipMove className={style.pedidos} duration={500} easing="ease-out">
           {
-            pedidos.map((pedido) => (
-              <Pedido
-                key={pedido.id}
-                nombre={pedido.nombre}
-                fechaSolicitud={pedido.fechaSolicitud}
-                ordenes={pedido.ordenes}
-              />
-            ))
+            pedidos
+              .sort(Panel.compararPrioridadPedidos)
+              .map((pedido) => (
+                <Pedido
+                  key={pedido.id}
+                  nombre={pedido.nombre}
+                  fechaSolicitud={pedido.fechaSolicitud}
+                  ordenes={pedido.ordenes}
+                />
+              ))
           }
         </FlipMove>
       </div>
