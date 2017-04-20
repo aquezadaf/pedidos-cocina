@@ -17,3 +17,7 @@ export function onPedidoNuevo(cb) {
 export function onPedidoFinalizado(cb) {
   socket.on("pedidoFinalizado", cb);
 }
+
+export function onPedidoAumentarPriodidad(cb) {
+  socket.on("pedidoAumentarPriodidad", cb);
+}

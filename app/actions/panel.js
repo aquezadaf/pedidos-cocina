@@ -1,4 +1,8 @@
-import { onPedidoNuevo, onPedidoFinalizado } from "../utils/socket";
+import {
+  onPedidoNuevo,
+  onPedidoFinalizado,
+  onPedidoAumentarPriodidad
+} from "../utils/socket";
 
 export const AGREGAR_PEDIDO = "AGREGAR_PEDIDO";
 export const ELIMINAR_PEDIDO = "ELIMINAR_PEDIDO";
@@ -32,6 +36,9 @@ export function subscribirCambiosPanel() {
     });
     onPedidoFinalizado((indice) => {
       dispatch(eliminarPedido(indice));
+    });
+    onPedidoAumentarPriodidad((id) => {
+      dispatch(aumentarPrioridadPedido(id));
     });
   };
 }
