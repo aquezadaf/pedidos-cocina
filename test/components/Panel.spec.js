@@ -35,6 +35,11 @@ describe("Componenete Panel", () => {
     expect(panelEnzyme.find("Pedido").length)
       .toBe(props.pedidos.length);
   });
+  it("Debe subscribirse a cambios al construir el panel", () => {
+    const { props } = crearPanel();
+    expect(props.subscribirCambiosPanel.mock.calls.length)
+      .toBe(1);
+  });
   it("Los pedidos se deben ordenar segun prioridad de manera descendente", () => {
     const { panelEnzyme, props } = crearPanel();
     const pedidos = panelEnzyme.find("Pedido");
