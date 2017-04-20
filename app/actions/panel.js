@@ -34,8 +34,8 @@ export function subscribirCambiosPanel() {
     onPedidoNuevo((pedido) => {
       dispatch(agregarPedido(pedido));
     });
-    onPedidoFinalizado((indice) => {
-      dispatch(eliminarPedido(indice));
+    onPedidoFinalizado((id) => {
+      dispatch(eliminarPedido(id));
     });
     onPedidoAumentarPriodidad((id) => {
       dispatch(aumentarPrioridadPedido(id));
