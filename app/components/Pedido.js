@@ -19,7 +19,7 @@ export default class Pedido extends Component {
           {
             ordenes.map((orden) => (
               <div key={orden.id} className={style.orden}>
-                {orden.nombre} ({orden.cantidad})
+                {orden.cantidad} x {orden.nombre}
               </div>
             ))
           }
