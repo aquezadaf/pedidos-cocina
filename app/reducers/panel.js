@@ -8,10 +8,8 @@ export default function panel(state = [], action) {
   switch (action.type) {
     case AGREGAR_PEDIDO:
       if (state.find((pedido) => pedido.id === action.pedido.id)) {
-        console.log("REPETIDO");
         return state;
       }
-      console.log("NUEVO");
       return [
         ...state,
         action.pedido
