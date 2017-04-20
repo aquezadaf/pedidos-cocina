@@ -33,7 +33,7 @@ export default class Pedido extends Component {
     return (
       <div className={nombreClasePedido}>
         <div className={style.nombre}>
-          ({prioridad}) {nombre}
+          {nombre}
         </div>
         <div className={style.ordenes}>
           {
