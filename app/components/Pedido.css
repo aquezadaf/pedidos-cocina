@@ -49,12 +49,3 @@
 .orden {
   text-align: left;
 }
-
-@keyframes zoom {
-  0%, 25% {
-    transform: scale(0, 0);
-  }
-  35%, 100% {
-    transform: scale(1, 1);
-  }
-}
