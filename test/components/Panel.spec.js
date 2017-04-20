@@ -31,9 +31,9 @@ describe("Componenete Panel", () => {
       .toBe("Panel pedidos");
   });
   it("La cantidad de elementos en la liste debe ser igual a los pedidos ", () => {
-    const { panelEnzyme } = crearPanel();
+    const { panelEnzyme, props } = crearPanel();
     expect(panelEnzyme.find("Pedido").length)
-      .toBe(2);
+      .toBe(props.pedidos.length);
   });
   it("Los pedidos se deben ordenar segun prioridad de manera descendente", () => {
     const { panelEnzyme, props } = crearPanel();
