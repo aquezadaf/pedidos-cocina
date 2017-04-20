@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import FlipMove from "react-flip-move";
 import Pedido from "./Pedido";
 import style from "./Panel.css";
 
@@ -18,7 +19,7 @@ export default class Panel extends Component {
     return (
       <div className={style.panel}>
         <h1 className={style.titulo}>Panel pedidos</h1>
-        <div className={style.pedidos}>
+        <FlipMove className={style.pedidos} duration={500} easing="ease-out">
           {
             pedidos.map((pedido) => (
               <Pedido
@@ -29,7 +30,7 @@ export default class Panel extends Component {
               />
             ))
           }
-        </div>
+        </FlipMove>
       </div>
     );
   }
