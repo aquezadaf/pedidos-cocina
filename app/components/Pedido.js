@@ -28,7 +28,7 @@ export default class Pedido extends Component {
   }
 
   render() {
-    const { nombre, fechaSolicitud, ordenes, prioridad } = this.props;
+    const { nombre, fechaSolicitud, ordenes } = this.props;
     const nombreClasePedido = this.clasePrioridadPedido();
     return (
       <div className={nombreClasePedido}>
