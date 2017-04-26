@@ -4,14 +4,34 @@ import style from "./Pedido.css";
 export default class Pedido extends Component {
   props: {
     nombre: string,
+    prioridad: number,
     fechaSolicitud: Date,
     ordenes: Array
   }
 
+  clasePrioridadPedido() {
+    const coloresPrioridades = [
+      style.prioridadBaja,
+      style.prioridadNormal,
+      style.prioridadAlta,
+      style.prioridadMuyAlta
+    ];
+
+    let { prioridad } = this.props;
+    if (prioridad > 3) {
+      prioridad = 3;
+    } else if (prioridad < 0) {
+      prioridad = 0;
+    }
+
+    return [style.pedido, coloresPrioridades[prioridad]].join(" ");
+  }
+
   render() {
     const { nombre, fechaSolicitud, ordenes } = this.props;
+    const nombreClasePedido = this.clasePrioridadPedido();
     return (
-      <div className={style.pedido}>
+      <div className={nombreClasePedido}>
         <div className={style.nombre}>
           {nombre}
         </div>
@@ -19,7 +39,7 @@ export default class Pedido extends Component {
           {
             ordenes.map((orden) => (
               <div key={orden.id} className={style.orden}>
-                {orden.nombre} ({orden.cantidad})
+                {orden.cantidad} x {orden.nombre}
               </div>
             ))
           }

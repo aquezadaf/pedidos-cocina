@@ -19,4 +19,13 @@ describe("Acciones panel", () => {
     expect(accionesPanel.eliminarPedido(id))
       .toEqual(accionGenerada);
   });
+  it("Aumenter prioridad pedido debe generar accion aumeter prioridad pedido", () => {
+    const id = 1;
+    const accionGenerada = {
+      type: accionesPanel.AUMENTAR_PRIORIDAD_PEDIDO,
+      id
+    };
+    expect(accionesPanel.aumentarPrioridadPedido(id))
+      .toEqual(accionGenerada);
+  });
 });
