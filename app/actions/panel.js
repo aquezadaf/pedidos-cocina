@@ -1,12 +1,9 @@
-import {
-  onPedidoNuevo,
-  onPedidoFinalizado,
-  onPedidoAumentarPriodidad
-} from "../utils/socket";
+import * as eventosWebSocket from "../utils/eventosWebSocket";
 
 export const AGREGAR_PEDIDO = "AGREGAR_PEDIDO";
 export const ELIMINAR_PEDIDO = "ELIMINAR_PEDIDO";
 export const AUMENTAR_PRIORIDAD_PEDIDO = "AUMENTAR_PRIORIDAD_PEDIDO";
+export const SUBSCRIBIR_CAMBIOS_PANEL = "SUBSCRIBIR_CAMBIOS_PANEL";
 
 export function agregarPedido(pedido) {
   return {
@@ -30,15 +27,18 @@ export function aumentarPrioridadPedido(id) {
 }
 
 export function subscribirCambiosPanel() {
-  return (dispatch) => {
-    onPedidoNuevo((pedido) => {
-      dispatch(agregarPedido(pedido));
-    });
-    onPedidoFinalizado((id) => {
-      dispatch(eliminarPedido(id));
-    });
-    onPedidoAumentarPriodidad((id) => {
-      dispatch(aumentarPrioridadPedido(id));
-    });
+  return {
+    type: SUBSCRIBIR_CAMBIOS_PANEL,
+    meta: { subscribirWebSocket: true },
+    socketActions: [{
+      eventoSocket: eventosWebSocket.PEDIDO_NUEVO,
+      actionCreator: agregarPedido
+    }, {
+      eventoSocket: eventosWebSocket.PEDIDO_FINALIZADO,
+      actionCreator: eliminarPedido
+    }, {
+      eventoSocket: eventosWebSocket.PEDIDO_AUMENTAR_PRIORIDAD,
+      actionCreator: aumentarPrioridadPedido
+    }]
   };
 }

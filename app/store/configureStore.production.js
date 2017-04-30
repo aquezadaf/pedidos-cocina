@@ -3,11 +3,12 @@ import thunk from "redux-thunk";
 import { hashHistory } from "react-router";
 import { routerMiddleware } from "react-router-redux";
 import rootReducer from "../reducers";
+import webSocketMiddleware from "../middleware/crearWebSocketMiddleware";
 
 const router = routerMiddleware(hashHistory);
 
-const enhancer = applyMiddleware(thunk, router);
+const enhancer = applyMiddleware(thunk, router, webSocketMiddleware);
 
 export default function configureStore(initialState) {
-  return createStore(rootReducer, initialState, enhancer); // eslint-disable-line
+  return createStore(rootReducer, initialState, enhancer);
 }
