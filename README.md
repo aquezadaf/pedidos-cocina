@@ -1,6 +1,7 @@
 # Pedidos Cocina
 
 [![Build Status](https://travis-ci.org/aquezadaf/pedidos-cocina.svg?branch=master)](https://travis-ci.org/aquezadaf/pedidos-cocina)
+[![Build status](https://ci.appveyor.com/api/projects/status/k175abrxy4t97j4g/branch/master?svg=true)](https://ci.appveyor.com/project/aquezadaf/pedidos-cocina/branch/master)
 
 Parte del proyecto de titulo de Inacap Reserva Ya!. Esta aplicacion se encarga de administrar los pedidos de un restaurant. La aplicacion esta pensada para ser utilizada como una aplicacion de escritorio en un equipo con pantalla Touch.
 
