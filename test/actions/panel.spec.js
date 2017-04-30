@@ -28,4 +28,14 @@ describe("Acciones panel", () => {
     expect(accionesPanel.aumentarPrioridadPedido(id))
       .toEqual(accionGenerada);
   });
+  it("Subscribir cambios panel debe contener meta de subscripcion", () => {
+    const accionGenerada = accionesPanel.subscribirCambiosPanel();
+    expect(accionGenerada.meta)
+      .toEqual({ subscribirWebSocket: true });
+  });
+  it("Subscribir cambios panel debe contener los eventos del socket", () => {
+    const accionGenerada = accionesPanel.subscribirCambiosPanel();
+    expect(accionGenerada.socketActions.length)
+      .toEqual(3);
+  });
 });
