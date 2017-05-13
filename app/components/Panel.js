@@ -41,13 +41,7 @@ class Panel extends Component {
           {
             this.pedidosOrdenados()
               .map((pedido) => (
-                <Pedido
-                  key={pedido.id}
-                  nombre={pedido.nombre}
-                  prioridad={pedido.prioridad}
-                  fechaSolicitud={pedido.fechaSolicitud}
-                  ordenes={pedido.ordenes}
-                />
+                <Pedido key={pedido.id} {...pedido} />
               ))
           }
         </FlipMove>
