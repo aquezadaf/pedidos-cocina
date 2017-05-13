@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import FlipMove from "react-flip-move";
 import Pedido from "./Pedido";
-import style from "./Panel.css";
+import style from "./TableroPedidos.css";
 
 const propTypes = {
   pedidos: PropTypes.arrayOf(PropTypes.shape({
@@ -15,7 +15,7 @@ const propTypes = {
   subscribirCambiosPanel: PropTypes.func.isRequired
 };
 
-class Panel extends Component {
+class TableroPedidos extends Component {
   static compararPrioridadPedidos(primerPedido, segundoPedido) {
     return segundoPedido.prioridad - primerPedido.prioridad;
   }
@@ -30,13 +30,13 @@ class Panel extends Component {
     // Se clona los pedidos para no modificarlos con sort
     return []
       .concat(pedidos)
-      .sort(Panel.compararPrioridadPedidos);
+      .sort(TableroPedidos.compararPrioridadPedidos);
   }
 
   render() {
     return (
-      <div className={style.panel}>
-        <h1 className={style.titulo}>Panel pedidos</h1>
+      <div className={style.tablero}>
+        <h1 className={style.titulo}>Tablero pedidos</h1>
         <FlipMove className={style.pedidos} duration={500} easing="ease-out">
           {
             this.pedidosOrdenados()
@@ -50,6 +50,6 @@ class Panel extends Component {
   }
 }
 
-Panel.propTypes = propTypes;
+TableroPedidos.propTypes = propTypes;
 
-export default Panel;
+export default TableroPedidos;
