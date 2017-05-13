@@ -26,7 +26,7 @@ export function aumentarPrioridadPedido(id) {
   };
 }
 
-export function subscribirCambiosPanel() {
+export function subscribirCambiosPedidos() {
   return {
     type: SUBSCRIBIR_CAMBIOS_PANEL,
     meta: { subscribirWebSocket: true },
