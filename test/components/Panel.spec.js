@@ -7,11 +7,15 @@ function crearPanel() {
     pedidos: [{
       id: 1,
       nombre: "Pedido 1",
-      prioridad: 1
+      prioridad: 1,
+      fechaSolicitud: new Date(2017, 0, 1),
+      ordenes: []
     }, {
       id: 2,
       nombre: "Pedido 2",
-      prioridad: 2
+      prioridad: 2,
+      fechaSolicitud: new Date(2017, 0, 1),
+      ordenes: []
     }],
     subscribirCambiosPanel: jest.fn()
   };
