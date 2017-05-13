@@ -3,9 +3,9 @@ import { connect } from "react-redux";
 import TableroPedidos from "../components/TableroPedidos";
 import { subscribirCambiosPedidos } from "../actions/tableroPedidos";
 
-function mapStateToProps(state) {
+function mapStateToProps({ pedidos }) {
   return {
-    pedidos: state.panel
+    pedidos
   };
 }
 
