@@ -13,11 +13,19 @@ const propTypes = {
   })).isRequired
 };
 
+const coloresPrioridades = [
+  style.prioridadBaja,
+  style.prioridadNormal,
+  style.prioridadAlta,
+  style.prioridadMuyAlta
+];
+
 class Pedido extends Component {
   prioridadEnRangoValido() {
+    const cantidadColores = coloresPrioridades.length;
     const { prioridad } = this.props;
-    if (prioridad > 3) {
-      return 3;
+    if (prioridad > cantidadColores) {
+      return cantidadColores;
     } else if (prioridad < 0) {
       return 0;
     }
@@ -25,12 +33,6 @@ class Pedido extends Component {
   }
 
   clasePrioridadPedido() {
-    const coloresPrioridades = [
-      style.prioridadBaja,
-      style.prioridadNormal,
-      style.prioridadAlta,
-      style.prioridadMuyAlta
-    ];
     const prioridad = this.prioridadEnRangoValido();
     return [
       style.pedido,
