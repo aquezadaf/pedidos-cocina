@@ -1,14 +1,19 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import style from "./Pedido.css";
 
-export default class Pedido extends Component {
-  props: {
-    nombre: string,
-    prioridad: number,
-    fechaSolicitud: Date,
-    ordenes: Array
-  }
+const propTypes = {
+  nombre: PropTypes.string.isRequired,
+  prioridad: PropTypes.number.isRequired,
+  fechaSolicitud: PropTypes.instanceOf(Date).isRequired,
+  ordenes: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    cantidad: PropTypes.number.isRequired,
+    nombre: PropTypes.string.isRequired,
+  })).isRequired
+};
 
+class Pedido extends Component {
   clasePrioridadPedido() {
     const coloresPrioridades = [
       style.prioridadBaja,
@@ -51,3 +56,7 @@ export default class Pedido extends Component {
     );
   }
 }
+
+Pedido.propTypes = propTypes;
+
+export default Pedido;
