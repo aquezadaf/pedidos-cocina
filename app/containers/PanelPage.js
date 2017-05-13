@@ -1,7 +1,7 @@
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import Panel from "../components/Panel";
-import { subscribirCambiosPanel } from "../actions/panel";
+import TableroPedidos from "../components/TableroPedidos";
+import { subscribirCambiosPedidos } from "../actions/tableroPedidos";
 
 function mapStateToProps(state) {
   return {
@@ -10,7 +10,7 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ subscribirCambiosPanel }, dispatch);
+  return bindActionCreators({ subscribirCambiosPedidos }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Panel);
+export default connect(mapStateToProps, mapDispatchToProps)(TableroPedidos);
