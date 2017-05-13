@@ -1,9 +1,21 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import FlipMove from "react-flip-move";
 import Pedido from "./Pedido";
 import style from "./Panel.css";
 
-export default class Panel extends Component {
+const propTypes = {
+  pedidos: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    nombre: PropTypes.string.isRequired,
+    prioridad: PropTypes.number.isRequired,
+    fechaSolicitud: PropTypes.instanceOf(Date).isRequired,
+    ordenes: PropTypes.array.isRequired
+  })).isRequired,
+  subscribirCambiosPanel: PropTypes.func.isRequired
+};
+
+class Panel extends Component {
   static compararPrioridadPedidos(primerPedido, segundoPedido) {
     return segundoPedido.prioridad - primerPedido.prioridad;
   }
@@ -11,11 +23,6 @@ export default class Panel extends Component {
   constructor(props) {
     super(props);
     props.subscribirCambiosPanel();
-  }
-
-  props: {
-    pedidos: [],
-    subscribirCambiosPanel: () => void
   }
 
   pedidosOrdenados() {
@@ -34,13 +41,7 @@ export default class Panel extends Component {
           {
             this.pedidosOrdenados()
               .map((pedido) => (
-                <Pedido
-                  key={pedido.id}
-                  nombre={pedido.nombre}
-                  prioridad={pedido.prioridad}
-                  fechaSolicitud={pedido.fechaSolicitud}
-                  ordenes={pedido.ordenes}
-                />
+                <Pedido key={pedido.id} {...pedido} />
               ))
           }
         </FlipMove>
@@ -48,3 +49,7 @@ export default class Panel extends Component {
     );
   }
 }
+
+Panel.propTypes = propTypes;
+
+export default Panel;

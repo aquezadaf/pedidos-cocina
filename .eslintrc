@@ -10,7 +10,6 @@
     "comma-dangle": "off",
     "compat/compat": "error",
     "consistent-return": "off",
-    "flowtype-errors/show-errors": "error",
     "generator-star-spacing": "off",
     "import/no-extraneous-dependencies": "off",
     "import/no-unresolved": "error",
@@ -22,13 +21,12 @@
     "promise/no-native": "off",
     "promise/param-names": "error",
     "quotes": [2, "double"],
+    "react/forbid-prop-types": ["error", { "forbid": ["any"] }],
     "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
     "react/jsx-no-bind": "off",
     "react/prefer-stateless-function": "off"
   },
   "plugins": [
-    "flowtype",
-    "flowtype-errors",
     "import",
     "promise",
     "compat",

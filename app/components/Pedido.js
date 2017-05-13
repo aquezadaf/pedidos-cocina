@@ -1,30 +1,43 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import style from "./Pedido.css";
 
-export default class Pedido extends Component {
-  props: {
-    nombre: string,
-    prioridad: number,
-    fechaSolicitud: Date,
-    ordenes: Array
+const propTypes = {
+  nombre: PropTypes.string.isRequired,
+  prioridad: PropTypes.number.isRequired,
+  fechaSolicitud: PropTypes.instanceOf(Date).isRequired,
+  ordenes: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    cantidad: PropTypes.number.isRequired,
+    nombre: PropTypes.string.isRequired,
+  })).isRequired
+};
+
+const coloresPrioridades = [
+  style.prioridadBaja,
+  style.prioridadNormal,
+  style.prioridadAlta,
+  style.prioridadMuyAlta
+];
+
+class Pedido extends Component {
+  prioridadEnRangoValido() {
+    const cantidadColores = coloresPrioridades.length - 1;
+    const { prioridad } = this.props;
+    if (prioridad > cantidadColores) {
+      return cantidadColores;
+    } else if (prioridad < 0) {
+      return 0;
+    }
+    return prioridad;
   }
 
   clasePrioridadPedido() {
-    const coloresPrioridades = [
-      style.prioridadBaja,
-      style.prioridadNormal,
-      style.prioridadAlta,
-      style.prioridadMuyAlta
-    ];
-
-    let { prioridad } = this.props;
-    if (prioridad > 3) {
-      prioridad = 3;
-    } else if (prioridad < 0) {
-      prioridad = 0;
-    }
-
-    return [style.pedido, coloresPrioridades[prioridad]].join(" ");
+    const prioridad = this.prioridadEnRangoValido();
+    return [
+      style.pedido,
+      coloresPrioridades[prioridad]
+    ].join(" ");
   }
 
   render() {
@@ -51,3 +64,7 @@ export default class Pedido extends Component {
     );
   }
 }
+
+Pedido.propTypes = propTypes;
+
+export default Pedido;
