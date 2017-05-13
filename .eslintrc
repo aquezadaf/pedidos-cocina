@@ -22,10 +22,10 @@
     "promise/no-native": "off",
     "promise/param-names": "error",
     "quotes": [2, "double"],
+    "react/forbid-prop-types": ["error", { "forbid": ["any"] }],
     "react/jsx-filename-extension": ["error", { "extensions": [".js", ".jsx"] }],
     "react/jsx-no-bind": "off",
-    "react/prefer-stateless-function": "off",
-    "react/forbid-prop-types": ["error", { "forbid": ["any"] }]
+    "react/prefer-stateless-function": "off"
   },
   "plugins": [
     "flowtype",
