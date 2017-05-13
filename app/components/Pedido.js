@@ -22,7 +22,7 @@ const coloresPrioridades = [
 
 class Pedido extends Component {
   prioridadEnRangoValido() {
-    const cantidadColores = coloresPrioridades.length;
+    const cantidadColores = coloresPrioridades.length - 1;
     const { prioridad } = this.props;
     if (prioridad > cantidadColores) {
       return cantidadColores;
