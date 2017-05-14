@@ -9,6 +9,4 @@ const router = routerMiddleware(hashHistory);
 
 const enhancer = applyMiddleware(thunk, router, webSocketMiddleware);
 
-export default function configureStore(initialState) {
-  return createStore(rootReducer, initialState, enhancer);
-}
+export default (initialState) => createStore(rootReducer, initialState, enhancer);

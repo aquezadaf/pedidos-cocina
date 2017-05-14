@@ -32,7 +32,7 @@ const enhancer = composeEnhancers(
   applyMiddleware(thunk, router, logger, webSocketMiddleware)
 );
 
-export default function configureStore(initialState) {
+export default (initialState) => {
   const store = createStore(rootReducer, initialState, enhancer);
 
   if (module.hot) {
@@ -42,4 +42,4 @@ export default function configureStore(initialState) {
   }
 
   return store;
-}
+};
