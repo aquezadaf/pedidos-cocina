@@ -3,7 +3,7 @@ import * as eventosWebSocket from "../utils/eventosWebSocket";
 export const AGREGAR_PEDIDO = "AGREGAR_PEDIDO";
 export const ELIMINAR_PEDIDO = "ELIMINAR_PEDIDO";
 export const AUMENTAR_PRIORIDAD_PEDIDO = "AUMENTAR_PRIORIDAD_PEDIDO";
-export const SUBSCRIBIR_CAMBIOS_PANEL = "SUBSCRIBIR_CAMBIOS_PANEL";
+export const SUBSCRIBIR_CAMBIOS_PEDIDOS = "SUBSCRIBIR_CAMBIOS_PEDIDOS";
 
 export function agregarPedido(pedido) {
   return {
@@ -26,9 +26,9 @@ export function aumentarPrioridadPedido(id) {
   };
 }
 
-export function subscribirCambiosPanel() {
+export function subscribirCambiosPedidos() {
   return {
-    type: SUBSCRIBIR_CAMBIOS_PANEL,
+    type: SUBSCRIBIR_CAMBIOS_PEDIDOS,
     meta: { subscribirWebSocket: true },
     socketActions: [{
       eventoSocket: eventosWebSocket.PEDIDO_NUEVO,

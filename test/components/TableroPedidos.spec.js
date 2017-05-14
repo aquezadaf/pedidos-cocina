@@ -1,8 +1,8 @@
 import { shallow } from "enzyme";
 import React from "react";
-import Panel from "../../app/components/Panel";
+import TableroPedidos from "../../app/components/TableroPedidos";
 
-function crearPanel() {
+function crearTableroPedidos() {
   const props = {
     pedidos: [{
       id: 1,
@@ -17,36 +17,36 @@ function crearPanel() {
       fechaSolicitud: new Date(2017, 0, 1),
       ordenes: []
     }],
-    subscribirCambiosPanel: jest.fn()
+    subscribirCambiosPedidos: jest.fn()
   };
 
-  const panelEnzyme = shallow(<Panel {...props} />);
+  const tableroEnzyme = shallow(<TableroPedidos {...props} />);
 
   return {
-    panelEnzyme,
+    tableroEnzyme,
     props
   };
 }
 
-describe("Componenete Panel", () => {
+describe("Componente Tablero Pedidos", () => {
   it("Debe renderizar componente", () => {
-    const { panelEnzyme } = crearPanel();
-    expect(panelEnzyme.find("h1").text())
-      .toBe("Panel pedidos");
+    const { tableroEnzyme } = crearTableroPedidos();
+    expect(tableroEnzyme.find("h1").text())
+      .toBe("Tablero pedidos");
   });
   it("La cantidad de elementos en la liste debe ser igual a los pedidos ", () => {
-    const { panelEnzyme, props } = crearPanel();
-    expect(panelEnzyme.find("Pedido").length)
+    const { tableroEnzyme, props } = crearTableroPedidos();
+    expect(tableroEnzyme.find("Pedido").length)
       .toBe(props.pedidos.length);
   });
-  it("Debe subscribirse a cambios al construir el panel", () => {
-    const { props } = crearPanel();
-    expect(props.subscribirCambiosPanel.mock.calls.length)
+  it("Debe subscribirse a cambios al construir el tablero", () => {
+    const { props } = crearTableroPedidos();
+    expect(props.subscribirCambiosPedidos.mock.calls.length)
       .toBe(1);
   });
   it("Los pedidos se deben ordenar segun prioridad de manera descendente", () => {
-    const { panelEnzyme, props } = crearPanel();
-    const pedidos = panelEnzyme.find("Pedido");
+    const { tableroEnzyme, props } = crearTableroPedidos();
+    const pedidos = tableroEnzyme.find("Pedido");
     const keyPrimerPedido = Number(pedidos.at(0).key());
     const keySegundoPedido = Number(pedidos.at(1).key());
     expect(keyPrimerPedido)
@@ -55,17 +55,21 @@ describe("Componenete Panel", () => {
       .toBe(props.pedidos[0].id);
   });
   it("Debe determinar cual de los pedidos tiene mayor prioridad", () => {
-    const { props } = crearPanel();
+    const { props } = crearTableroPedidos();
     const pedidoPrioridadInferior = props.pedidos[0];
     const pedidoPrioridadSuperior = props.pedidos[1];
-    expect(Panel.compararPrioridadPedidos(pedidoPrioridadInferior, pedidoPrioridadSuperior))
+    const diferenciaPrioridad =
+      TableroPedidos.compararPrioridadPedidos(pedidoPrioridadInferior, pedidoPrioridadSuperior);
+    expect(diferenciaPrioridad)
       .toBeGreaterThanOrEqual(0);
   });
   it("Debe determinar cual de los pedidos tiene menor prioridad", () => {
-    const { props } = crearPanel();
+    const { props } = crearTableroPedidos();
     const pedidoPrioridadInferior = props.pedidos[0];
     const pedidoPrioridadSuperior = props.pedidos[1];
-    expect(Panel.compararPrioridadPedidos(pedidoPrioridadSuperior, pedidoPrioridadInferior))
+    const diferenciaPrioridad =
+      TableroPedidos.compararPrioridadPedidos(pedidoPrioridadSuperior, pedidoPrioridadInferior);
+    expect(diferenciaPrioridad)
       .toBeLessThan(0);
   });
 });

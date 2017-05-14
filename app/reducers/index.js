@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
 import { routerReducer as routing } from "react-router-redux";
-import panel from "../reducers/panel";
+import pedidos from "../reducers/tableroPedidos";
 
 const rootReducer = combineReducers({
   routing,
-  panel
+  pedidos
 });
 
 export default rootReducer;

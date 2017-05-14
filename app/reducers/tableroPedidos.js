@@ -2,9 +2,9 @@ import {
   AGREGAR_PEDIDO,
   ELIMINAR_PEDIDO,
   AUMENTAR_PRIORIDAD_PEDIDO
-} from "../actions/panel";
+} from "../actions/tableroPedidos";
 
-export default function panel(state = [], action) {
+export default function tableroPedidos(state = [], action) {
   switch (action.type) {
     case AGREGAR_PEDIDO:
       if (state.find((pedido) => pedido.id === action.pedido.id)) {
