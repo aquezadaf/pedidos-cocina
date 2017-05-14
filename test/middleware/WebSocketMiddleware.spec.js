@@ -1,6 +1,6 @@
 import webSocketMiddleware from "../../app/middleware/webSocketMiddleware";
 
-function mockSocket() {
+const mockSocket = () => {
   const eventos = {};
   return {
     on: jest.fn((evento, cb) => {
@@ -8,16 +8,14 @@ function mockSocket() {
     }),
     trigger: (evento) => { eventos[evento](); }
   };
-}
+};
 
-function generarActionValida() {
-  return {
-    meta: { subscribirWebSocket: true },
-    socketActions: [{ eventoSocket: "eventoPrueba", actionCreator: () => { } }]
-  };
-}
+const generarActionValida = () => ({
+  meta: { subscribirWebSocket: true },
+  socketActions: [{ eventoSocket: "eventoPrueba", actionCreator: () => { } }]
+});
 
-function ejecutarAction(action) {
+const ejecutarAction = (action) => {
   const socket = mockSocket();
   const middleware = webSocketMiddleware(socket);
   const dispatch = { dispatch: jest.fn() };
@@ -29,7 +27,7 @@ function ejecutarAction(action) {
     llamadasNext: next.mock.calls,
     triggerSocket: socket.trigger
   };
-}
+};
 
 describe("Web Socket Middleware", () => {
   it("No debe llamar a socket si action no tiene meta subscribirWebSocket", () => {

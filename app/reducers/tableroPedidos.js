@@ -4,7 +4,7 @@ import {
   AUMENTAR_PRIORIDAD_PEDIDO
 } from "../actions/tableroPedidos";
 
-export default function tableroPedidos(state = [], action) {
+export default (state = [], action) => {
   switch (action.type) {
     case AGREGAR_PEDIDO:
       if (state.find((pedido) => pedido.id === action.pedido.id)) {
@@ -29,4 +29,4 @@ export default function tableroPedidos(state = [], action) {
     default:
       return state;
   }
-}
+};

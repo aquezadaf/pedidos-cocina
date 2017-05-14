@@ -2,7 +2,7 @@ import { shallow } from "enzyme";
 import React from "react";
 import TableroPedidos from "../../app/components/TableroPedidos";
 
-function crearTableroPedidos() {
+const crearTableroPedidos = () => {
   const props = {
     pedidos: [{
       id: 1,
@@ -32,7 +32,7 @@ function crearTableroPedidos() {
     tableroEnzyme,
     props
   };
-}
+};
 
 describe("Componente Tablero Pedidos", () => {
   it("Debe renderizar componente", () => {
