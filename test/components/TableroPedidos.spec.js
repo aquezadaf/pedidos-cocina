@@ -58,14 +58,18 @@ describe("Componente Tablero Pedidos", () => {
     const { props } = crearTableroPedidos();
     const pedidoPrioridadInferior = props.pedidos[0];
     const pedidoPrioridadSuperior = props.pedidos[1];
-    expect(TableroPedidos.compararPrioridadPedidos(pedidoPrioridadInferior, pedidoPrioridadSuperior))
+    const diferenciaPrioridad =
+      TableroPedidos.compararPrioridadPedidos(pedidoPrioridadInferior, pedidoPrioridadSuperior);
+    expect(diferenciaPrioridad)
       .toBeGreaterThanOrEqual(0);
   });
   it("Debe determinar cual de los pedidos tiene menor prioridad", () => {
     const { props } = crearTableroPedidos();
     const pedidoPrioridadInferior = props.pedidos[0];
     const pedidoPrioridadSuperior = props.pedidos[1];
-    expect(TableroPedidos.compararPrioridadPedidos(pedidoPrioridadSuperior, pedidoPrioridadInferior))
+    const diferenciaPrioridad =
+      TableroPedidos.compararPrioridadPedidos(pedidoPrioridadSuperior, pedidoPrioridadInferior);
+    expect(diferenciaPrioridad)
       .toBeLessThan(0);
   });
 });
