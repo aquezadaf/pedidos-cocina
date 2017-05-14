@@ -28,12 +28,12 @@ describe("Acciones Tablero Pedido", () => {
     expect(accionesTablero.aumentarPrioridadPedido(id))
       .toEqual(accionGenerada);
   });
-  it("Subscribir cambios panel debe contener meta de subscripcion", () => {
+  it("Subscribir cambios pedidos debe contener meta de subscripcion", () => {
     const accionGenerada = accionesTablero.subscribirCambiosPedidos();
     expect(accionGenerada.meta)
       .toEqual({ subscribirWebSocket: true });
   });
-  it("Subscribir cambios panel debe contener los eventos del socket", () => {
+  it("Subscribir cambios pedidos debe contener los eventos del socket", () => {
     const accionGenerada = accionesTablero.subscribirCambiosPedidos();
     expect(accionGenerada.socketActions.length)
       .toEqual(3);
