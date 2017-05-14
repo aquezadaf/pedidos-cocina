@@ -3,14 +3,8 @@ import { connect } from "react-redux";
 import TableroPedidos from "../components/TableroPedidos";
 import { subscribirCambiosPedidos } from "../actions/tableroPedidos";
 
-function mapStateToProps({ pedidos }) {
-  return {
-    pedidos
-  };
-}
+const mapStateToProps = ({ pedidos }) => ({ pedidos });
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ subscribirCambiosPedidos }, dispatch);
-}
+const mapDispatchToProps = (dispatch) => bindActionCreators({ subscribirCambiosPedidos }, dispatch);
 
 export default connect(mapStateToProps, mapDispatchToProps)(TableroPedidos);
