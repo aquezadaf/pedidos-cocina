@@ -16,8 +16,14 @@ const propTypes = {
 };
 
 class TableroPedidos extends Component {
-  static compararPrioridadPedidos(primerPedido, segundoPedido) {
-    return segundoPedido.prioridad - primerPedido.prioridad;
+  // Ordenan los pedidos segun su prioridad de manera descendente
+  // y luego por su fecha de solicitud de manera ascendente
+  static determinarOrdenPedidos(primerPedido, segundoPedido) {
+    const diferenciaPrioridad = segundoPedido.prioridad - primerPedido.prioridad;
+    if (diferenciaPrioridad !== 0) {
+      return diferenciaPrioridad;
+    }
+    return primerPedido.fechaSolicitud - segundoPedido.fechaSolicitud;
   }
 
   constructor(props) {
@@ -30,7 +36,7 @@ class TableroPedidos extends Component {
     // Se clona los pedidos para no modificarlos con sort
     return []
       .concat(pedidos)
-      .sort(TableroPedidos.compararPrioridadPedidos);
+      .sort(TableroPedidos.determinarOrdenPedidos);
   }
 
   render() {
