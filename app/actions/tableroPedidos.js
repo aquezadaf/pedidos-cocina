@@ -26,13 +26,25 @@ export function aumentarPrioridadPedido(id) {
   };
 }
 
+const cambiarTipoFechaSolicitud = (pedido) => {
+  if (typeof pedido.fechaSolicitud === "string") {
+    return {
+      ...pedido,
+      fechaSolicitud: new Date(pedido.fechaSolicitud)
+    };
+  }
+  return pedido;
+};
+
+const agregarPedidoWebSocket = (pedido) => agregarPedido(cambiarTipoFechaSolicitud(pedido));
+
 export function subscribirCambiosPedidos() {
   return {
     type: SUBSCRIBIR_CAMBIOS_PEDIDOS,
     meta: { subscribirWebSocket: true },
     socketActions: [{
       eventoSocket: eventosWebSocket.PEDIDO_NUEVO,
-      actionCreator: agregarPedido
+      actionCreator: agregarPedidoWebSocket
     }, {
       eventoSocket: eventosWebSocket.PEDIDO_FINALIZADO,
       actionCreator: eliminarPedido
