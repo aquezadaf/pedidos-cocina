@@ -1,8 +1,8 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Provider } from "react-redux";
-import { Router } from "react-router";
-import routes from "../routes";
+import { ConnectedRouter } from "react-router-redux";
+import Routes from "../routes";
 
 const propTypes = {
   store: PropTypes.object.isRequired,
@@ -11,7 +11,9 @@ const propTypes = {
 
 const Root = ({ store, history }) => (
   <Provider store={store}>
-    <Router history={history} routes={routes} />
+    <ConnectedRouter history={history}>
+      <Routes />
+    </ConnectedRouter>
   </Provider>
 );
 
