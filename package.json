@@ -191,7 +191,7 @@
     "prop-types": "^15.5.10",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
-    "react-flip-move": "^2.9.2",
+    "react-flip-move": "^2.9.10",
     "react-hot-loader": "3.0.0-beta.6",
     "react-redux": "^5.0.4",
     "react-router": "^4.1.1",
@@ -199,7 +199,7 @@
     "react-router-redux": "^5.0.0-alpha.6",
     "redux": "^3.6.0",
     "redux-thunk": "^2.2.0",
-    "socket.io-client": "^1.7.3",
+    "socket.io-client": "^2.0.1",
     "source-map-support": "^0.4.15"
   },
   "devEngines": {
