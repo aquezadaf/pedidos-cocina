@@ -1,8 +1,10 @@
 .menuNavegacion {
   background-color: rgb(36, 45, 61);
+  height: 100%;
 }
 
 .listaMenu {
   color: #fff;
   list-style: none;
+  margin: 0;
 }

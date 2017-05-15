@@ -1,15 +1,18 @@
 .tablero {
   background-color: rgb(192, 164, 128);
+  /*height: 100%;*/
 }
 
 .titulo {
   color: white;
   text-align: center;
   padding-top: 10px;
+  margin: 0;
 }
 
 .pedidos {
   background-color: rgb(226, 214, 191);
   display: flex;
   flex-wrap: wrap;
+  overflow: scroll;
 }
