@@ -1,9 +1,4 @@
 .tablero {
-  background-color: rgb(192, 164, 128);
-  height: 100%;
-}
-
-.contenedorPedidos {
   background-color: rgb(226, 214, 191);
   height: 100%;
   overflow: scroll;
