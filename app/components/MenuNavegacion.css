@@ -11,7 +11,13 @@
 }
 
 .elementoLista {
-  padding: 15px 4px 3px;
+  padding: 8px 4px 8px;
+}
+
+.elementoListaSeleccionado {
+  padding: 8px 4px 8px;
+  transition: opacity 0.5s ease;
+  opacity: 0.3;
 }
 
 .link {
