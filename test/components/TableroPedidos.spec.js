@@ -37,10 +37,10 @@ const crearTableroPedidos = () => {
 describe("Componente Tablero Pedidos", () => {
   it("Debe renderizar componente", () => {
     const { tableroEnzyme } = crearTableroPedidos();
-    expect(tableroEnzyme.find("h1").text())
-      .toBe("Tablero pedidos");
+    expect(tableroEnzyme.find("div").hasClass("tablero"))
+      .toBe(true);
   });
-  it("La cantidad de elementos en la liste debe ser igual a los pedidos ", () => {
+  it("La cantidad de elementos en la lista debe ser igual a los pedidos ", () => {
     const { tableroEnzyme, props } = crearTableroPedidos();
     expect(tableroEnzyme.find("Pedido").length)
       .toBe(props.pedidos.length);

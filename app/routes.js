@@ -1,6 +1,6 @@
 import React from "react";
 import { Switch, Route } from "react-router";
-import App from "./containers/App";
+import App from "./components/App";
 import TableroPedidosPage from "./containers/TableroPedidosPage";
 
 export default () => (

@@ -1,0 +1,14 @@
+.app {
+  display: flex;
+  flex-flow: row;
+  height: 100vh;
+  width: 100vw;
+}
+
+.menu {
+  flex: 1;
+}
+
+.contenido {
+  flex: 16;
+}

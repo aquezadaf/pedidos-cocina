@@ -1,0 +1,33 @@
+.menuNavegacion {
+  background-color: rgb(36, 45, 61);
+  height: 100%;
+}
+
+.listaMenu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.elementoLista {
+  padding: 8px 4px;
+  transition: opacity 0.5s ease;
+  opacity: 0.3;
+}
+
+.elementoListaSeleccionado {
+  padding: 8px 4px;
+}
+
+.link {
+  text-decoration: none;
+  color: #fff;
+}
+
+.textoLink {
+  text-align: center;
+  font-size: 12px;
+  padding-top: 4px;
+  font-weight: bold;
+}

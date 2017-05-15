@@ -42,8 +42,7 @@ class TableroPedidos extends Component {
   render() {
     return (
       <div className={style.tablero}>
-        <h1 className={style.titulo}>Tablero pedidos</h1>
-        <FlipMove className={style.pedidos} duration={500} easing="ease-out">
+        <FlipMove duration={500} easing="ease-out" className={style.pedidos}>
           {
             this.pedidosOrdenados()
               .map((pedido) => (
