@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 import style from "./MenuNavegacion.css";
 
@@ -10,30 +10,22 @@ const elementosMenu = [
   { texto: "Configuración", icono: "fa-gears" }
 ];
 
-export default class MenuNavegacion extends Component {
-  static generarElementoLista(textoLink, iconoFontAwesome) {
-    const icono = `fa ${iconoFontAwesome} fa-2x`;
-    return (
-      <li className={style.elementoLista}>
-        <Link to="/" className={style.link}>
-          <i className={icono} aria-hidden="true" />
-          <div className={style.textoLink}>{textoLink}</div>
-        </Link>
-      </li>
-    );
-  }
-
-  render() {
-    return (
-      <div className={style.menuNavegacion}>
-        <ul className={style.listaMenu}>
-          {
-            elementosMenu.map(((elementoMenu) => (
-              MenuNavegacion.generarElementoLista(elementoMenu.texto, elementoMenu.icono)
-            )))
-          }
-        </ul>
-      </div>
-    );
-  }
-}
+export default () => (
+  <div className={style.menuNavegacion}>
+    <ul className={style.listaMenu}>
+      {
+        elementosMenu.map(((elementoMenu) => {
+          const icono = `fa ${elementoMenu.icono} fa-2x`;
+          return (
+            <li key={elementoMenu.icono} className={style.elementoLista} >
+              <Link to="/" className={style.link}>
+                <i className={icono} aria-hidden="true" />
+                <div className={style.textoLink}>{elementoMenu.texto}</div>
+              </Link>
+            </li>
+          );
+        }))
+      }
+    </ul>
+  </div>
+);
