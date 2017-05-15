@@ -11,7 +11,7 @@
 }
 
 .elementoLista {
-  padding: 15px 4px 3px 4px;
+  padding: 15px 4px 3px;
 }
 
 .link {
@@ -23,4 +23,5 @@
   text-align: center;
   font-size: 12px;
   padding-top: 4px;
+  font-weight: bold;
 }
