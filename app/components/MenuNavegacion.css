@@ -4,7 +4,23 @@
 }
 
 .listaMenu {
-  color: #fff;
   list-style: none;
   margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+.elementoLista {
+  padding: 15px 4px 3px 4px;
+}
+
+.link {
+  text-decoration: none;
+  color: #fff;
+}
+
+.textoLink {
+  text-align: center;
+  font-size: 12px;
+  padding-top: 4px;
 }
