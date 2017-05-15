@@ -3,13 +3,6 @@
   height: 100%;
 }
 
-.titulo {
-  color: white;
-  text-align: center;
-  padding-top: 10px;
-  margin: 0;
-}
-
 .contenedorPedidos {
   background-color: rgb(226, 214, 191);
   height: 100%;

@@ -42,7 +42,6 @@ class TableroPedidos extends Component {
   render() {
     return (
       <div className={style.tablero}>
-        <h1 className={style.titulo}>Tablero pedidos</h1>
         <div className={style.contenedorPedidos}>
           <FlipMove duration={500} easing="ease-out" className={style.pedidos}>
             {
