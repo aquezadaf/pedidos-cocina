@@ -11,6 +11,15 @@ const elementosMenu = [
 ];
 
 export default class MenuNavegacion extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { menuSeleccionado: "fa-home" };
+  }
+
+  seleccionarMenu(menuSeleccionado) {
+    this.setState({ menuSeleccionado });
+  }
+
   render() {
     return (
       <div className={style.menuNavegacion}>
@@ -20,7 +29,7 @@ export default class MenuNavegacion extends Component {
               const icono = `fa ${elementoMenu.icono} fa-2x`;
               return (
                 <li key={elementoMenu.icono} className={style.elementoLista} >
-                  <Link to="/" className={style.link}>
+                  <Link to="/" className={style.link} onClick={this.seleccionarMenu.bind(this, elementoMenu.icono)}>
                     <i className={icono} aria-hidden="true" />
                     <div className={style.textoLink}>{elementoMenu.texto}</div>
                   </Link>
