@@ -13,16 +13,18 @@
 .elementoLista {
   padding: 8px 4px;
   transition: opacity 0.5s ease;
-  opacity: 0.3;
-}
-
-.elementoListaSeleccionado {
-  padding: 8px 4px;
 }
 
 .link {
   text-decoration: none;
   color: #fff;
+  opacity: 0.3;
+}
+
+.linkActivo {
+  text-decoration: none;
+  color: #fff;
+  opacity: 1;
 }
 
 .textoLink {
@@ -30,4 +32,5 @@
   font-size: 12px;
   padding-top: 4px;
   font-weight: bold;
+  opacity: inherit;
 }
