@@ -20,22 +20,43 @@ export default class MenuNavegacion extends Component {
     this.setState({ menuSeleccionado });
   }
 
+  generarElementoMenu({ texto, icono }) {
+    const claseElementoMenu = this.state.menuSeleccionado === icono
+      ? style.elementoListaSeleccionado
+      : style.elementoLista;
+    return (
+      <li key={icono} className={claseElementoMenu}>
+        {
+          this.generarLink(texto, icono)
+        }
+      </li>
+    );
+  }
+
+  generarLink(texto, icono) {
+    const claseIcono = `fa ${icono} fa-2x`;
+    if (this.state.menuSeleccionado === icono) {
+      return (
+        <div className={style.link}>
+          <i className={claseIcono} aria-hidden="true" />
+          <div className={style.textoLink}>{texto}</div>
+        </div>
+      );
+    }
+    return (
+      <Link to="/" className={style.link} onClick={this.seleccionarMenu.bind(this, icono)}>
+        <i className={claseIcono} aria-hidden="true" />
+        <div className={style.textoLink}>{texto}</div>
+      </Link>
+    );
+  }
+
   render() {
     return (
       <div className={style.menuNavegacion}>
         <ul className={style.listaMenu}>
           {
-            elementosMenu.map(((elementoMenu) => {
-              const icono = `fa ${elementoMenu.icono} fa-2x`;
-              return (
-                <li key={elementoMenu.icono} className={style.elementoLista} >
-                  <Link to="/" className={style.link} onClick={this.seleccionarMenu.bind(this, elementoMenu.icono)}>
-                    <i className={icono} aria-hidden="true" />
-                    <div className={style.textoLink}>{elementoMenu.texto}</div>
-                  </Link>
-                </li>
-              );
-            }))
+            elementosMenu.map(((elementoMenu) => this.generarElementoMenu(elementoMenu)))
           }
         </ul>
       </div>
