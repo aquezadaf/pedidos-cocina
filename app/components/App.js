@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import MenuNavegacion from "./MenuNavegacion";
 
 const propTypes = {
   children: PropTypes.element.isRequired
@@ -7,7 +8,10 @@ const propTypes = {
 
 const App = ({ children }) => (
   <div>
-    {children}
+    <MenuNavegacion />
+    <div>
+      {children}
+    </div>
   </div>
 );
 
