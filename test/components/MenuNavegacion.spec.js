@@ -15,10 +15,10 @@ describe("Componente del Menu de Navegacion", () => {
     expect(menuEnzyme.find("li").length)
       .toBe(5);
   });
-  it("Una de las opciones del menu debe estar seleccionada", () => {
+  it("Ninguno de las opciones del menu debe estar seleccionada", () => {
     const menuEnzyme = crearMenuNavegacion();
-    expect(menuEnzyme.find(".elementoListaSeleccionado").length)
-      .toBe(1);
+    expect(menuEnzyme.find(".linkActivo").length)
+      .toBe(0);
   });
   it("Al hacer click en un menu no seleccionado se debe seleccionar", () => {
     const menuEnzyme = crearMenuNavegacion();
