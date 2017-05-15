@@ -43,14 +43,16 @@ class TableroPedidos extends Component {
     return (
       <div className={style.tablero}>
         <h1 className={style.titulo}>Tablero pedidos</h1>
-        <FlipMove className={style.pedidos} duration={500} easing="ease-out">
-          {
-            this.pedidosOrdenados()
-              .map((pedido) => (
-                <Pedido key={pedido.id} {...pedido} />
-              ))
-          }
-        </FlipMove>
+        <div className={style.contenedorPedidos}>
+          <FlipMove duration={500} easing="ease-out" className={style.pedidos}>
+            {
+              this.pedidosOrdenados()
+                .map((pedido) => (
+                  <Pedido key={pedido.id} {...pedido} />
+                ))
+            }
+          </FlipMove>
+        </div>
       </div>
     );
   }
