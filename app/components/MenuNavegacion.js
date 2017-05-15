@@ -4,9 +4,8 @@ import style from "./MenuNavegacion.css";
 export default class MenuNavegacion extends Component {
   render() {
     return (
-      <div>
-        <h5>Menu navegacion</h5>
-        <ul>
+      <div className={style.menuNavegacion}>
+        <ul className={style.listaMenu}>
           <li>Inicio</li>
           <li>Pedidos</li>
           <li>Reservas</li>
