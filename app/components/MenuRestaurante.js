@@ -1,9 +1,36 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 
-export default class MenuRestaurante extends Component {
+const propTypes = {
+  menu: PropTypes.shape({
+    platosMenu: PropTypes.arrayOf(PropTypes.string).isRequired,
+    estaCargando: PropTypes.bool.isRequired
+  }).isRequired,
+  solicitarMenuRestaurante: PropTypes.func.isRequired
+};
+
+class MenuRestaurante extends Component {
+  componentDidMount() {
+    this.props.solicitarMenuRestaurante();
+  }
+
   render() {
+    const { platosMenu } = this.props.menu;
     return (
-      <div>Menu del restaurante</div>
+      <div>
+        <h1>Menu del restaurante</h1>
+        <ul>
+          {platosMenu.map((platoMenu) => (
+            <li key={platoMenu}>
+              {platoMenu}
+            </li>
+          ))}
+        </ul>
+      </div>
     );
   }
 }
+
+MenuRestaurante.propTypes = propTypes;
+
+export default MenuRestaurante;
