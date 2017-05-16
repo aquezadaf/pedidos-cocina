@@ -5,10 +5,11 @@ const obtenerMenuRestaurante = () =>
   fetch(`${process.env.API_URL}menu`)
     .then(menu => menu.json());
 
-export const solicitarMenuRestaurante = (dispatch) => () => {
+export const solicitarMenuRestaurante = () => (dispatch) => {
   dispatch({ type: SOLICITAR_MENU_RESTAURANTE });
-  return obtenerMenuRestaurante
+  return obtenerMenuRestaurante()
     .then(menu => dispatch(cargarMenuRestaurante(menu)));
 };
 
-export const cargarMenuRestaurante = (menu) => ({ type: CARGAR_MENU_RESTAURANTE, menu });
+export const cargarMenuRestaurante = (platosMenu) =>
+  ({ type: CARGAR_MENU_RESTAURANTE, platosMenu });
