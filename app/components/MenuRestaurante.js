@@ -15,7 +15,10 @@ class MenuRestaurante extends Component {
   }
 
   render() {
-    const { platosMenu } = this.props.menu;
+    const { platosMenu, estaCargando } = this.props.menu;
+    if (estaCargando) {
+      return (<div>Cargando...</div>);
+    }
     return (
       <div>
         <ul>
