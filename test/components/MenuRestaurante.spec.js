@@ -2,14 +2,15 @@ import { mount } from "enzyme";
 import React from "react";
 import MenuRestaurante from "../../app/components/MenuRestaurante";
 
-const crearMenuRestaurante = () => {
+const crearMenuRestaurante = (estaCargando = false) => {
   const props = {
     menu: {
       platosMenu: [
         "Primer plato",
         "Segundo plato",
-        "Tercer plato"],
-      estaCargando: false
+        "Tercer plato"
+      ],
+      estaCargando
     },
     solicitarMenuRestaurante: jest.fn()
   };
@@ -40,6 +41,8 @@ describe("Componente Tablero Pedidos", () => {
       .toBe(1);
   });
   it("Debe mostrar spinner al estar cargando", () => {
-    expect(true).toBe(false);
+    const { menuEnzyme } = crearMenuRestaurante(true);
+    expect(menuEnzyme.find("div").text())
+      .toBe("Cargando...");
   });
 });
