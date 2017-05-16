@@ -8,9 +8,15 @@ const estadoInicial = {
 export default (state = estadoInicial, action) => {
   switch (action.type) {
     case SOLICITAR_MENU_RESTAURANTE:
-      return state;
+      return {
+        ...state,
+        estaCargando: true
+      };
     case CARGAR_MENU_RESTAURANTE:
-      return state;
+      return {
+        platosMenu: action.platosMenu,
+        estaCargando: false
+      };
     default:
       return state;
   }
