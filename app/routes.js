@@ -6,7 +6,7 @@ import TableroPedidosPage from "./containers/TableroPedidosPage";
 export default () => (
   <App>
     <Switch>
-      <Route path="/" component={TableroPedidosPage} />
+      <Route exact path="/" component={TableroPedidosPage} />
     </Switch>
   </App>
 );
