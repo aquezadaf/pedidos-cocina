@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import Spinner from "./Spinner";
 
 const propTypes = {
   menu: PropTypes.shape({
@@ -17,7 +18,7 @@ class MenuRestaurante extends Component {
   render() {
     const { platosMenu, estaCargando } = this.props.menu;
     if (estaCargando) {
-      return (<div>Cargando...</div>);
+      return <Spinner />;
     }
     return (
       <div>
