@@ -18,7 +18,6 @@ class MenuRestaurante extends Component {
     const { platosMenu } = this.props.menu;
     return (
       <div>
-        <h1>Menu del restaurante</h1>
         <ul>
           {platosMenu.map((platoMenu) => (
             <li key={platoMenu}>
