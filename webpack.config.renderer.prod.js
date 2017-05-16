@@ -148,7 +148,8 @@ export default merge.smart(baseConfig, {
     new webpack.DefinePlugin({
       "process.env": {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV || "production"),
-        WEBSOCKET_URL: JSON.stringify("")
+        WEBSOCKET_URL: JSON.stringify(""),
+        API_URL: JSON.stringify("")
       }
     }),
 
