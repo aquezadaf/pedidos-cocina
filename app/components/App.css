@@ -12,4 +12,5 @@
 .contenido {
   flex: 16;
   background-color: rgb(226, 214, 191);
+  padding: 10px;
 }
