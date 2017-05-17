@@ -4,6 +4,8 @@ export const AGREGAR_PEDIDO = "AGREGAR_PEDIDO";
 export const ELIMINAR_PEDIDO = "ELIMINAR_PEDIDO";
 export const AUMENTAR_PRIORIDAD_PEDIDO = "AUMENTAR_PRIORIDAD_PEDIDO";
 export const SUBSCRIBIR_CAMBIOS_PEDIDOS = "SUBSCRIBIR_CAMBIOS_PEDIDOS";
+export const SOLICITAR_PEDIDOS = "SOLICITAR_PEDIDOS";
+export const CARGAR_PEDIDOS = "CARGAR_PEDIDOS";
 
 export const agregarPedido = (pedido) => ({
   type: AGREGAR_PEDIDO,
@@ -46,3 +48,16 @@ export const subscribirCambiosPedidos = () => ({
     actionCreator: aumentarPrioridadPedido
   }]
 });
+
+const obtenerPedidos = () =>
+  fetch(`${process.env.API_URL}pedidos`)
+    .then(pedidos => pedidos.json());
+
+export const solicitarPedidos = () => (dispatch) => {
+  dispatch({ type: SOLICITAR_PEDIDOS });
+  return obtenerPedidos()
+    .then(pedidos => pedidos.map(cambiarTipoFechaSolicitud))
+    .then(pedidos => dispatch(cargarPedidos(pedidos)));
+};
+
+export const cargarPedidos = (pedidos) => ({ type: CARGAR_PEDIDOS, pedidos });
