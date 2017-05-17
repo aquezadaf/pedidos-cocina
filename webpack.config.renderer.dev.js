@@ -208,9 +208,9 @@ export default merge.smart(baseConfig, {
     new webpack.DefinePlugin({
       "process.env": {
         NODE_ENV: JSON.stringify(process.env.NODE_ENV || "development"),
-        WEBSOCKET_URL: JSON.stringify("ws://localhost:8080/")
+        WEBSOCKET_URL: JSON.stringify("ws://localhost:8080/"),
+        API_URL: JSON.stringify("http://localhost:8080/api/v1/")
       }
-
     }),
 
     new webpack.LoaderOptionsPlugin({
