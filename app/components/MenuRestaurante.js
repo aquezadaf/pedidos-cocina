@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Spinner from "./Spinner";
+import PantallaCargando from "./PantallaCargando";
 
 const propTypes = {
   menu: PropTypes.shape({
@@ -17,19 +17,18 @@ class MenuRestaurante extends Component {
 
   render() {
     const { platosMenu, estaCargando } = this.props.menu;
-    if (estaCargando) {
-      return <Spinner />;
-    }
     return (
-      <div>
-        <ul>
-          {platosMenu.map((platoMenu) => (
-            <li key={platoMenu}>
-              {platoMenu}
-            </li>
-          ))}
-        </ul>
-      </div>
+      <PantallaCargando estaCargando={estaCargando}>
+        <div>
+          <ul>
+            {platosMenu.map((platoMenu) => (
+              <li key={platoMenu}>
+                {platoMenu}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </PantallaCargando>
     );
   }
 }
