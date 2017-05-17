@@ -40,9 +40,4 @@ describe("Componente Tablero Pedidos", () => {
     expect(props.solicitarMenuRestaurante.mock.calls.length)
       .toBe(1);
   });
-  it("Debe mostrar spinner al estar cargando", () => {
-    const { menuEnzyme } = crearMenuRestaurante(true);
-    expect(menuEnzyme.find("div").text())
-      .toBe("Cargando...");
-  });
 });
