@@ -1,3 +1,4 @@
+import { combineReducers } from "redux";
 import {
   AGREGAR_PEDIDO,
   ELIMINAR_PEDIDO,
@@ -6,53 +7,47 @@ import {
   CARGAR_PEDIDOS
 } from "../actions/tableroPedidos";
 
-const estadoInicial = {
-  pedidos: [],
-  estaCargando: false
-};
-
-export default (state = estadoInicial, action) => {
+const pedidos = (state = [], action) => {
   switch (action.type) {
     case AGREGAR_PEDIDO:
-      if (state.pedidos.find((pedido) => pedido.id === action.pedido.id)) {
+      if (state.find((pedido) => pedido.id === action.pedido.id)) {
         return state;
       }
-      return {
-        ...state,
-        pedidos: [
-          ...state.pedidos,
-          action.pedido
-        ]
-      };
+      return [
+        ...state.pedidos,
+        action.pedido
+      ];
     case ELIMINAR_PEDIDO:
-      return {
-        ...state,
-        pedidos: state.pedidos.filter((pedido) => pedido.id !== action.id)
-      };
+      return state.filter((pedido) => pedido.id !== action.id)
     case AUMENTAR_PRIORIDAD_PEDIDO:
-      return {
-        ...state,
-        pedidos: state.pedidos.map((pedido) => {
-          if (pedido.id !== action.id) {
-            return pedido;
-          }
-          return {
-            ...pedido,
-            prioridad: pedido.prioridad + 1
-          };
-        })
-      };
-    case SOLICITAR_PEDIDOS:
-      return {
-        ...state,
-        estaCargando: true
-      };
+      return state.map((pedido) => {
+        if (pedido.id !== action.id) {
+          return pedido;
+        }
+        return {
+          ...pedido,
+          prioridad: pedido.prioridad + 1
+        };
+      });
     case CARGAR_PEDIDOS:
-      return {
-        pedidos: action.pedidos,
-        estaCargando: false
-      };
+      return action.pedidos;
     default:
       return state;
   }
 };
+
+const estaCargando = (state = false, action) => {
+  switch (action.type) {
+    case SOLICITAR_PEDIDOS:
+      return true;
+    case CARGAR_PEDIDOS:
+      return false;
+    default:
+      return state;
+  }
+};
+
+export default combineReducers({
+  pedidos,
+  estaCargando
+});
