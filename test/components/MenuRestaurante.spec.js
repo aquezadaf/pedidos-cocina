@@ -2,7 +2,7 @@ import { mount } from "enzyme";
 import React from "react";
 import MenuRestaurante from "../../app/components/MenuRestaurante";
 
-const crearMenuRestaurante = (estaCargando = false) => {
+const crearMenuRestaurante = () => {
   const props = {
     menu: {
       platosMenu: [
@@ -10,7 +10,7 @@ const crearMenuRestaurante = (estaCargando = false) => {
         "Segundo plato",
         "Tercer plato"
       ],
-      estaCargando
+      estaCargando: false
     },
     solicitarMenuRestaurante: jest.fn()
   };
@@ -23,7 +23,7 @@ const crearMenuRestaurante = (estaCargando = false) => {
   };
 };
 
-describe("Componente Tablero Pedidos", () => {
+describe("Componente Menu Restaurante", () => {
   it("Debe renderizar componente", () => {
     const { menuEnzyme } = crearMenuRestaurante();
     expect(menuEnzyme.find("div").exists())
