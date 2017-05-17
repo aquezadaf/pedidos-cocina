@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import PantallaCargando from "./PantallaCargando";
 
 const propTypes = {
-  menu: PropTypes.shape({
+  menuRestaurante: PropTypes.shape({
     platosMenu: PropTypes.arrayOf(PropTypes.string).isRequired,
     estaCargando: PropTypes.bool.isRequired
   }).isRequired,
@@ -16,7 +16,7 @@ class MenuRestaurante extends Component {
   }
 
   render() {
-    const { platosMenu, estaCargando } = this.props.menu;
+    const { platosMenu, estaCargando } = this.props.menuRestaurante;
     return (
       <PantallaCargando estaCargando={estaCargando}>
         <div>
