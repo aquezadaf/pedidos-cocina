@@ -1,7 +1,8 @@
 import {
   AGREGAR_PEDIDO,
   ELIMINAR_PEDIDO,
-  AUMENTAR_PRIORIDAD_PEDIDO
+  AUMENTAR_PRIORIDAD_PEDIDO,
+  CARGAR_PEDIDOS
 } from "../actions/tableroPedidos";
 
 export default (state = [], action) => {
@@ -26,6 +27,8 @@ export default (state = [], action) => {
           prioridad: pedido.prioridad + 1
         };
       });
+    case CARGAR_PEDIDOS:
+      return action.pedidos;
     default:
       return state;
   }

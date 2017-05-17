@@ -12,7 +12,8 @@ const propTypes = {
     fechaSolicitud: PropTypes.instanceOf(Date).isRequired,
     ordenes: PropTypes.array.isRequired
   })).isRequired,
-  subscribirCambiosPedidos: PropTypes.func.isRequired
+  subscribirCambiosPedidos: PropTypes.func.isRequired,
+  solicitarPedidos: PropTypes.func.isRequired
 };
 
 class TableroPedidos extends Component {
@@ -29,6 +30,7 @@ class TableroPedidos extends Component {
   constructor(props) {
     super(props);
     props.subscribirCambiosPedidos();
+    props.solicitarPedidos();
   }
 
   pedidosOrdenados() {
