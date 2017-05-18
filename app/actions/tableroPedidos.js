@@ -49,15 +49,26 @@ export const subscribirCambiosPedidos = () => ({
   }]
 });
 
+const debeObtenerPedidos = ({ tableroPedidos }) => {
+  if (tableroPedidos.estaCargando) {
+    return false;
+  } else if (tableroPedidos.pedidos && tableroPedidos.pedidos.length > 0) {
+    return false;
+  }
+  return true;
+};
+
 const obtenerPedidos = () =>
   fetch(`${process.env.API_URL}pedidos`)
     .then(pedidos => pedidos.json());
 
-export const solicitarPedidos = () => (dispatch) => {
-  dispatch({ type: SOLICITAR_PEDIDOS });
-  return obtenerPedidos()
-    .then(pedidos => pedidos.map(cambiarTipoFechaSolicitud))
-    .then(pedidos => dispatch(cargarPedidos(pedidos)));
+export const solicitarPedidos = () => (dispatch, getState) => {
+  if (debeObtenerPedidos(getState())) {
+    dispatch({ type: SOLICITAR_PEDIDOS });
+    return obtenerPedidos()
+      .then(pedidos => pedidos.map(cambiarTipoFechaSolicitud))
+      .then(pedidos => dispatch(cargarPedidos(pedidos)));
+  }
 };
 
 export const cargarPedidos = (pedidos) => ({ type: CARGAR_PEDIDOS, pedidos });
