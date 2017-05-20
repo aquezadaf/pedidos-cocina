@@ -4,14 +4,11 @@ import MenuRestaurante from "../../app/components/MenuRestaurante";
 
 const crearMenuRestaurante = () => {
   const props = {
-    menu: {
-      platosMenu: [
-        "Primer plato",
-        "Segundo plato",
-        "Tercer plato"
-      ],
-      estaCargando: false
-    },
+    platosMenu: [
+      "Primer plato",
+      "Segundo plato",
+      "Tercer plato"
+    ],
     solicitarMenuRestaurante: jest.fn()
   };
 
@@ -26,14 +23,14 @@ const crearMenuRestaurante = () => {
 describe("Componente Menu Restaurante", () => {
   it("Debe renderizar componente", () => {
     const { menuEnzyme } = crearMenuRestaurante();
-    expect(menuEnzyme.find("div").exists())
+    expect(menuEnzyme.find("div > ul").exists())
       .toBe(true);
   });
   it("Debe mostrar todos los platos del menu", () => {
     const { menuEnzyme, props } = crearMenuRestaurante();
     const platosEnComponente = menuEnzyme.find("div > ul > li").length;
     expect(platosEnComponente)
-      .toBe(props.menu.platosMenu.length);
+      .toBe(props.platosMenu.length);
   });
   it("Debe solicitar el menu del restuarante al montar el componente", () => {
     const { props } = crearMenuRestaurante();
