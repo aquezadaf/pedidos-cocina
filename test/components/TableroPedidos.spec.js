@@ -1,8 +1,8 @@
-import { shallow } from "enzyme";
+import { shallow, mount } from "enzyme";
 import React from "react";
 import TableroPedidos from "../../app/components/TableroPedidos";
 
-const crearTableroPedidos = () => {
+const crearTableroPedidos = (construirConMontado) => {
   const props = {
     pedidos: [{
       id: 1,
@@ -23,10 +23,16 @@ const crearTableroPedidos = () => {
       fechaSolicitud: new Date(2017, 0, 1, 1, 1, 3),
       ordenes: []
     }],
-    subscribirCambiosPedidos: jest.fn()
+    subscribirCambiosPedidos: jest.fn(),
+    solicitarPedidos: jest.fn()
   };
 
-  const tableroEnzyme = shallow(<TableroPedidos {...props} />);
+  let tableroEnzyme;
+  if (construirConMontado) {
+    tableroEnzyme = mount(<TableroPedidos {...props} />);
+  } else {
+    tableroEnzyme = shallow(<TableroPedidos {...props} />);
+  }
 
   return {
     tableroEnzyme,
@@ -36,22 +42,24 @@ const crearTableroPedidos = () => {
 
 describe("Componente Tablero Pedidos", () => {
   it("Debe renderizar componente", () => {
-    const { tableroEnzyme } = crearTableroPedidos();
+    const { tableroEnzyme } = crearTableroPedidos(false);
     expect(tableroEnzyme.find("div").hasClass("tablero"))
       .toBe(true);
   });
   it("La cantidad de elementos en la lista debe ser igual a los pedidos ", () => {
-    const { tableroEnzyme, props } = crearTableroPedidos();
+    const { tableroEnzyme, props } = crearTableroPedidos(false);
     expect(tableroEnzyme.find("Pedido").length)
       .toBe(props.pedidos.length);
   });
-  it("Debe subscribirse a cambios al construir el tablero", () => {
-    const { props } = crearTableroPedidos();
+  it("Debe subscribirse a cambios y solicitar pedidos al montar el tablero", () => {
+    const { props } = crearTableroPedidos(true);
+    expect(props.solicitarPedidos.mock.calls.length)
+      .toBe(1);
     expect(props.subscribirCambiosPedidos.mock.calls.length)
       .toBe(1);
   });
   it("Los pedidos se deben ordenar los pedidos por prioridad descendente y fecha solicitud ascendente", () => {
-    const { tableroEnzyme, props } = crearTableroPedidos();
+    const { tableroEnzyme, props } = crearTableroPedidos(false);
     const pedidos = tableroEnzyme.find("Pedido");
     const keyPrimerPedido = Number(pedidos.at(0).key());
     const keySegundoPedido = Number(pedidos.at(1).key());
@@ -64,7 +72,7 @@ describe("Componente Tablero Pedidos", () => {
       .toBe(props.pedidos[0].id);
   });
   it("Debe determinar cual de los pedidos tiene mayor prioridad", () => {
-    const { props } = crearTableroPedidos();
+    const { props } = crearTableroPedidos(false);
     const pedidoPrioridadInferior = props.pedidos[0];
     const pedidoPrioridadSuperior = props.pedidos[1];
     const diferenciaPrioridad =
@@ -73,7 +81,7 @@ describe("Componente Tablero Pedidos", () => {
       .toBeGreaterThanOrEqual(0);
   });
   it("Debe determinar cual de los pedidos tiene menor prioridad", () => {
-    const { props } = crearTableroPedidos();
+    const { props } = crearTableroPedidos(false);
     const pedidoPrioridadInferior = props.pedidos[0];
     const pedidoPrioridadSuperior = props.pedidos[1];
     const diferenciaPrioridad =
@@ -82,7 +90,7 @@ describe("Componente Tablero Pedidos", () => {
       .toBeLessThan(0);
   });
   it("Para pedidos con igual prioridad debe determinar cual de los pedidos tiene una fecha solicitud mas antigua", () => {
-    const { props } = crearTableroPedidos();
+    const { props } = crearTableroPedidos(false);
     const pedidoPrioridadInferior = props.pedidos[1];
     const pedidoPrioridadSuperior = props.pedidos[2];
     const diferenciaPrioridad =
@@ -91,7 +99,7 @@ describe("Componente Tablero Pedidos", () => {
       .toBeGreaterThanOrEqual(0);
   });
   it("Para pedidos con igual prioridad debe determinar cual de los pedidos tiene una fecha solicitud mas reciente", () => {
-    const { props } = crearTableroPedidos();
+    const { props } = crearTableroPedidos(false);
     const pedidoPrioridadInferior = props.pedidos[1];
     const pedidoPrioridadSuperior = props.pedidos[2];
     const diferenciaPrioridad =
