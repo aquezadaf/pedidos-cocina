@@ -36,7 +36,7 @@ describe("Componente Pedido", () => {
     const textoFechaFormatoLocal = props.fechaSolicitud.toLocaleString();
     expect(pedidoEnzyme.find(".fecha").text())
       .toEqual(textoFechaFormatoLocal);
-  })
+  });
   it("Debe asignar clase prioridad baja a pedido de prioridad 0", () => {
     const { pedidoEnzyme } = crearPedidoPrioridad(0);
     const divClase = pedidoEnzyme.find("div").first();

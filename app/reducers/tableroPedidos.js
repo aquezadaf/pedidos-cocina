@@ -18,7 +18,7 @@ const pedidos = (state = [], action) => {
         action.pedido
       ];
     case ELIMINAR_PEDIDO:
-      return state.filter((pedido) => pedido.id !== action.id)
+      return state.filter((pedido) => pedido.id !== action.id);
     case AUMENTAR_PRIORIDAD_PEDIDO:
       return state.map((pedido) => {
         if (pedido.id !== action.id) {

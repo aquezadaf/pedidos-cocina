@@ -8,7 +8,8 @@ const debeObtenerMenuRestaurante = ({ menuRestaurante }) => {
     return false;
   }
   return true;
-}
+};
+
 const obtenerMenuRestaurante = () =>
   fetch(`${process.env.API_URL}menu`)
     .then(menu => menu.json());

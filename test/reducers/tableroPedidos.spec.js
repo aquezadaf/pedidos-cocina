@@ -65,7 +65,11 @@ describe("Reducer Tablero Pedidos", () => {
       ],
       estaCargando: true
     };
-    expect(tableroPedidos(estadoInicial, { type: AUMENTAR_PRIORIDAD_PEDIDO, id: idPedidoPrioridad }))
+    const estadoGenerado = tableroPedidos(estadoInicial, {
+      type: AUMENTAR_PRIORIDAD_PEDIDO,
+      id: idPedidoPrioridad
+    });
+    expect(estadoGenerado)
       .toEqual(nuevoEstado);
   });
   it("No debe agregar un pedido si es que el id existe en el store", () => {
@@ -89,7 +93,11 @@ describe("Reducer Tablero Pedidos", () => {
       ],
       estaCargando: true
     };
-    expect(tableroPedidos(estadoInicial, { type: AGREGAR_PEDIDO, pedido: nuevoPedido }))
+    const estadoGenerado = tableroPedidos(estadoInicial, {
+      type: AGREGAR_PEDIDO,
+      pedido: nuevoPedido
+    });
+    expect(estadoGenerado)
       .toEqual(nuevoEstado);
   });
   it("Solicitar pedidos debe dejar cargando en verdadero", () => {

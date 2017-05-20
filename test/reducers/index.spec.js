@@ -22,7 +22,3 @@ describe("Root reducer de la aplicacion", () => {
       .toEqual(estadoAplicacion);
   });
 });
-
-
-
-
