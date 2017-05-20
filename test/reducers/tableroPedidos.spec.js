@@ -92,7 +92,7 @@ describe("Reducer Tablero Pedidos", () => {
     expect(tableroPedidos(estadoInicial, { type: AGREGAR_PEDIDO, pedido: nuevoPedido }))
       .toEqual(nuevoEstado);
   });
-  it("Solicitar un pedidos debe dejar cargando en verdadero", () => {
+  it("Solicitar pedidos debe dejar cargando en verdadero", () => {
     const estadoInicial = {
       pedidos: [],
       estaCargando: false
