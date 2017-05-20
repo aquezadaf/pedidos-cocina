@@ -27,10 +27,9 @@ class TableroPedidos extends Component {
     return primerPedido.fechaSolicitud - segundoPedido.fechaSolicitud;
   }
 
-  constructor(props) {
-    super(props);
-    props.solicitarPedidos();
-    props.subscribirCambiosPedidos();
+  componentDidMount() {
+    this.props.solicitarPedidos();
+    this.props.subscribirCambiosPedidos();
   }
 
   pedidosOrdenados() {
