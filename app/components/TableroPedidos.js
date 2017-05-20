@@ -5,15 +5,13 @@ import Pedido from "./Pedido";
 import style from "./TableroPedidos.css";
 
 const propTypes = {
-  tableroPedidos: PropTypes.shape({
-    pedidos: PropTypes.arrayOf(PropTypes.shape({
-      id: PropTypes.number.isRequired,
-      nombre: PropTypes.string.isRequired,
-      prioridad: PropTypes.number.isRequired,
-      fechaSolicitud: PropTypes.instanceOf(Date).isRequired,
-      ordenes: PropTypes.array.isRequired
-    })).isRequired
-  }).isRequired,
+  pedidos: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    nombre: PropTypes.string.isRequired,
+    prioridad: PropTypes.number.isRequired,
+    fechaSolicitud: PropTypes.instanceOf(Date).isRequired,
+    ordenes: PropTypes.array.isRequired
+  })).isRequired,
   subscribirCambiosPedidos: PropTypes.func.isRequired,
   solicitarPedidos: PropTypes.func.isRequired
 };
@@ -36,7 +34,7 @@ class TableroPedidos extends Component {
   }
 
   pedidosOrdenados() {
-    const { pedidos } = this.props.tableroPedidos;
+    const { pedidos } = this.props;
     // Se clona los pedidos para no modificarlos con sort
     return []
       .concat(pedidos)

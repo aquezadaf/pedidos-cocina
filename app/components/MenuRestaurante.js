@@ -2,9 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 const propTypes = {
-  menuRestaurante: PropTypes.shape({
-    platosMenu: PropTypes.arrayOf(PropTypes.string).isRequired
-  }).isRequired,
+  platosMenu: PropTypes.arrayOf(PropTypes.string).isRequired,
   solicitarMenuRestaurante: PropTypes.func.isRequired
 };
 
@@ -14,7 +12,7 @@ class MenuRestaurante extends Component {
   }
 
   render() {
-    const { platosMenu } = this.props.menuRestaurante;
+    const { platosMenu } = this.props;
     return (
       <div>
         <ul>
