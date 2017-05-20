@@ -38,4 +38,18 @@ describe("Acciones Tablero Pedido", () => {
     expect(accionGenerada.socketActions.length)
       .toEqual(3);
   });
+  it("Solicitar pedidos debe generar funcion", () => {
+    const funcionGenerada = accionesTablero.solicitarPedidos();
+    expect(typeof funcionGenerada)
+      .toBe("function");
+  });
+  it("Cargar pedidos debe generar accion cargar pedidos", () => {
+    const pedidos = [{ id: 1 }, { id: 2 }, { id: 3 }];
+    const accionGenerada = {
+      type: accionesTablero.CARGAR_PEDIDOS,
+      pedidos
+    };
+    expect(accionesTablero.cargarPedidos(pedidos))
+      .toEqual(accionGenerada);
+  });
 });
