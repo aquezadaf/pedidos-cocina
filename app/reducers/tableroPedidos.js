@@ -14,7 +14,7 @@ const pedidos = (state = [], action) => {
         return state;
       }
       return [
-        ...state.pedidos,
+        ...state,
         action.pedido
       ];
     case ELIMINAR_PEDIDO:
