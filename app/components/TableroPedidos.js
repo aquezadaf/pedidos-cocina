@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import FlipMove from "react-flip-move";
 import Pedido from "./Pedido";
-import PantallaCargando from "./PantallaCargando";
 import style from "./TableroPedidos.css";
 
 const propTypes = {
@@ -13,8 +12,7 @@ const propTypes = {
       prioridad: PropTypes.number.isRequired,
       fechaSolicitud: PropTypes.instanceOf(Date).isRequired,
       ordenes: PropTypes.array.isRequired
-    })).isRequired,
-    estaCargando: PropTypes.bool.isRequired
+    })).isRequired
   }).isRequired,
   subscribirCambiosPedidos: PropTypes.func.isRequired,
   solicitarPedidos: PropTypes.func.isRequired
@@ -47,18 +45,16 @@ class TableroPedidos extends Component {
 
   render() {
     return (
-      <PantallaCargando estaCargando={this.props.tableroPedidos.estaCargando}>
-        <div className={style.tablero}>
-          <FlipMove duration={500} easing="ease-out" className={style.pedidos}>
-            {
-              this.pedidosOrdenados()
-                .map((pedido) => (
-                  <Pedido key={pedido.id} {...pedido} />
-                ))
-            }
-          </FlipMove>
-        </div>
-      </PantallaCargando>
+      <div className={style.tablero}>
+        <FlipMove duration={500} easing="ease-out" className={style.pedidos}>
+          {
+            this.pedidosOrdenados()
+              .map((pedido) => (
+                <Pedido key={pedido.id} {...pedido} />
+              ))
+          }
+        </FlipMove>
+      </div>
     );
   }
 }

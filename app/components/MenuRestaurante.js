@@ -1,11 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import PantallaCargando from "./PantallaCargando";
 
 const propTypes = {
   menuRestaurante: PropTypes.shape({
-    platosMenu: PropTypes.arrayOf(PropTypes.string).isRequired,
-    estaCargando: PropTypes.bool.isRequired
+    platosMenu: PropTypes.arrayOf(PropTypes.string).isRequired
   }).isRequired,
   solicitarMenuRestaurante: PropTypes.func.isRequired
 };
@@ -16,19 +14,17 @@ class MenuRestaurante extends Component {
   }
 
   render() {
-    const { platosMenu, estaCargando } = this.props.menuRestaurante;
+    const { platosMenu } = this.props.menuRestaurante;
     return (
-      <PantallaCargando estaCargando={estaCargando}>
-        <div>
-          <ul>
-            {platosMenu.map((platoMenu) => (
-              <li key={platoMenu}>
-                {platoMenu}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </PantallaCargando>
+      <div>
+        <ul>
+          {platosMenu.map((platoMenu) => (
+            <li key={platoMenu}>
+              {platoMenu}
+            </li>
+          ))}
+        </ul>
+      </div>
     );
   }
 }
