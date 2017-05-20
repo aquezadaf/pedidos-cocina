@@ -1,10 +1,17 @@
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import TableroPedidos from "../components/TableroPedidos";
-import { subscribirCambiosPedidos } from "../actions/tableroPedidos";
+import { conectarPantallaCargando } from "../components/PantallaCargando";
+import { subscribirCambiosPedidos, solicitarPedidos } from "../actions/tableroPedidos";
 
-const mapStateToProps = ({ pedidos }) => ({ pedidos });
+const mapStateToProps = ({ tableroPedidos }) => ({
+  pedidos: tableroPedidos.pedidos,
+  estaCargando: tableroPedidos.estaCargando
+});
 
-const mapDispatchToProps = (dispatch) => bindActionCreators({ subscribirCambiosPedidos }, dispatch);
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators({ subscribirCambiosPedidos, solicitarPedidos }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(TableroPedidos);
+const tableroConCargando = conectarPantallaCargando(TableroPedidos);
+
+export default connect(mapStateToProps, mapDispatchToProps)(tableroConCargando);

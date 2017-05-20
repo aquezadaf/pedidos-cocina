@@ -1,10 +1,13 @@
+import { combineReducers } from "redux";
 import {
   AGREGAR_PEDIDO,
   ELIMINAR_PEDIDO,
-  AUMENTAR_PRIORIDAD_PEDIDO
+  AUMENTAR_PRIORIDAD_PEDIDO,
+  SOLICITAR_PEDIDOS,
+  CARGAR_PEDIDOS
 } from "../actions/tableroPedidos";
 
-export default (state = [], action) => {
+const pedidos = (state = [], action) => {
   switch (action.type) {
     case AGREGAR_PEDIDO:
       if (state.find((pedido) => pedido.id === action.pedido.id)) {
@@ -26,7 +29,25 @@ export default (state = [], action) => {
           prioridad: pedido.prioridad + 1
         };
       });
+    case CARGAR_PEDIDOS:
+      return action.pedidos;
     default:
       return state;
   }
 };
+
+const estaCargando = (state = false, action) => {
+  switch (action.type) {
+    case SOLICITAR_PEDIDOS:
+      return true;
+    case CARGAR_PEDIDOS:
+      return false;
+    default:
+      return state;
+  }
+};
+
+export default combineReducers({
+  pedidos,
+  estaCargando
+});

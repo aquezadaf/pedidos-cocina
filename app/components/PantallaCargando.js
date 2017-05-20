@@ -24,3 +24,9 @@ const PantallaCargando = ({ estaCargando, children }) => {
 PantallaCargando.propTypes = propTypes;
 
 export default PantallaCargando;
+
+export const conectarPantallaCargando = (Componente) => (props) => (
+  <PantallaCargando {...props}>
+    <Componente {...props} />
+  </PantallaCargando>
+);
