@@ -1,5 +1,8 @@
+import { LLAMAR_API } from "../middleware/apiMiddleware";
+
 export const SOLICITAR_MENU_RESTAURANTE = "SOLICITAR_MENU_RESTAURANTE";
 export const CARGAR_MENU_RESTAURANTE = "CARGAR_MENU_RESTAURANTE";
+export const ERROR_SOLICITUD_MENU = "ERROR_SOLICITUD_MENU";
 
 const debeObtenerMenuRestaurante = ({ menuRestaurante }) => {
   if (menuRestaurante.estaCargando) {
@@ -10,17 +13,11 @@ const debeObtenerMenuRestaurante = ({ menuRestaurante }) => {
   return true;
 };
 
-const obtenerMenuRestaurante = () =>
-  fetch(`${process.env.API_URL}menu`)
-    .then(menu => menu.json());
-
-export const solicitarMenuRestaurante = () => (dispatch, getState) => {
-  if (debeObtenerMenuRestaurante(getState())) {
-    dispatch({ type: SOLICITAR_MENU_RESTAURANTE });
-    return obtenerMenuRestaurante()
-      .then(menu => dispatch(cargarMenuRestaurante(menu)));
+export const solicitarMenuRestaurante = () => ({
+  [LLAMAR_API]: {
+    types: [SOLICITAR_MENU_RESTAURANTE, CARGAR_MENU_RESTAURANTE, ERROR_SOLICITUD_MENU],
+    endpoint: "menu",
+    nombrePayloadFetch: "platosMenu",
+    llamarApi: debeObtenerMenuRestaurante
   }
-};
-
-export const cargarMenuRestaurante = (platosMenu) =>
-  ({ type: CARGAR_MENU_RESTAURANTE, platosMenu });
+});
