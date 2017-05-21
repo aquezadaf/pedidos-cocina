@@ -26,6 +26,15 @@ const generarFuncionProcesarResultados = (procesarResultados) => {
   return (resultado) => resultado;
 };
 
+const validarRespuestaServidor = (response) => response
+  .json()
+  .then((json) => {
+    if (!response.ok) {
+      return Promise.reject(json);
+    }
+    return json;
+  });
+
 const apiMiddleware = (urlApi) => {
   if (!urlApi) {
     throw new Error("Se debe especificar una url para consumir la api");
@@ -48,10 +57,12 @@ const apiMiddleware = (urlApi) => {
 
     next({ type: INICIO_LLAMADA_API });
     return fetch(`${urlApi}${endpoint}`)
-      .then(response => response.json())
+      .then(validarRespuestaServidor)
       .then(funcionProcesarResultados)
-      .then(response => next({ type: LLAMADA_API_FINALIZADA, [nombrePayloadFetch]: response }))
-      .catch(error => next({ type: ERROR_LLAMADA_API, error }));
+      .then(
+      response => next({ type: LLAMADA_API_FINALIZADA, [nombrePayloadFetch]: response }),
+      error => next({ type: ERROR_LLAMADA_API, error })
+      );
   };
 };
 

@@ -25,7 +25,7 @@ const mockFetchAccionApiValida = () => {
     { id: 1, nombre: "Primer pedido" },
     { id: 2, nombre: "Segundo pedido" }
   ];
-  const respuestaMock = fetch.mockResponseOnce(JSON.stringify(respuestaFetch));
+  const respuestaMock = fetch.mockResponseOnce(JSON.stringify(respuestaFetch), { status: 200 });
   return {
     respuestaFetch,
     respuestaMock
