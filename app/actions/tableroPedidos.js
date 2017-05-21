@@ -65,6 +65,7 @@ export const solicitarPedidos = () => ({
     types: [SOLICITAR_PEDIDOS, CARGAR_PEDIDOS, ERROR_SOLICITUD_PEDIDOS],
     endpoint: "pedidos",
     nombrePayloadFetch: "pedidos",
-    llamarApi: debeObtenerPedidos
+    llamarApi: debeObtenerPedidos,
+    procesarResultados: (pedidos) => pedidos.map(cambiarTipoFechaSolicitud)
   }
 });

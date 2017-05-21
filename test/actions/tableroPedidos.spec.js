@@ -49,6 +49,8 @@ describe("Acciones Tablero Pedido", () => {
       .toHaveProperty("nombrePayloadFetch");
     expect(objetoMiddleware)
       .toHaveProperty("llamarApi");
+    expect(objetoMiddleware)
+      .toHaveProperty("procesarResultados");
   });
   it("Debe llamar api de solicitarPedidos debe retornar falso si esta cargando es verdadero", () => {
     const llamarApi = accionesTablero.solicitarPedidos()[LLAMAR_API].llamarApi;
@@ -67,5 +69,14 @@ describe("Acciones Tablero Pedido", () => {
     const debeLlamarApi = llamarApi({ tableroPedidos: { estaCargando: false, pedidos: [] } });
     expect(debeLlamarApi)
       .toBe(true);
+  });
+  it("Procesar resultados de solicitarPedidos debe convertir las fechas en string a date", () => {
+    const procesarResultados = accionesTablero.solicitarPedidos()[LLAMAR_API].procesarResultados;
+    const pedidosString = [{ fechaSolicitud: "01-01-2017" }, { fechaSolicitud: "02-02-2017" }];
+    const pedidosDate = procesarResultados(pedidosString);
+    pedidosDate.forEach((pedido) => {
+      expect(pedido.fechaSolicitud)
+        .toBeInstanceOf(Date);
+    });
   });
 });
