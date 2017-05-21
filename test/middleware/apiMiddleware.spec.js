@@ -97,18 +97,46 @@ describe("Api Middleware", () => {
   });
   it("Si el resultado de la funcion llamarApi es verdadero se debe llamar a la api", () => {
     const { respuestaMock } = mockFetchAccionApiValida();
-    const accionConLlamarApi = { ...accionApiValida };
-    accionConLlamarApi[LLAMAR_API].llamarApi = () => true;
+    const accionConLlamarApi = {
+      [LLAMAR_API]: {
+        ...accionApiValida[LLAMAR_API],
+        llamarApi: () => true
+      }
+    };
     const { promesaMiddleware } = ejecutarAction(accionConLlamarApi);
     return promesaMiddleware
       .then(() => expect(respuestaMock)
         .toHaveBeenCalledWith("http://localhost/pedidos"));
   });
   it("Si el resultado de la funcion llamarApi es falso no se debe llamar a la api", () => {
-    const accionConLlamarApi = { ...accionApiValida };
-    accionConLlamarApi[LLAMAR_API].llamarApi = () => false;
+    const accionConLlamarApi = {
+      [LLAMAR_API]: {
+        ...accionApiValida[LLAMAR_API],
+        llamarApi: () => false
+      }
+    };
     const { llamadasNext } = ejecutarAction(accionConLlamarApi);
     expect(llamadasNext.length)
       .toBe(0);
+  });
+  it("Si se pasa opcion para procesar resultados, se deben enviar los resultados de la api procesados", () => {
+    mockFetchAccionApiValida();
+    const agregarNuevaPropiedad = (pedidos) =>
+      pedidos.map((pedido) => ({ ...pedido, nuevaPropiedad: true }));
+    const accionConProcesado = {
+      [LLAMAR_API]: {
+        ...accionApiValida[LLAMAR_API],
+        procesarResultados: agregarNuevaPropiedad
+      }
+    };
+    const { promesaMiddleware, llamadasNext } = ejecutarAction(accionConProcesado);
+    return promesaMiddleware
+      .then(() => {
+        const parametroNext = llamadasNext[1][0];
+        return parametroNext.pedidos.forEach((pedidos) => {
+          expect(pedidos)
+            .toHaveProperty("nuevaPropiedad");
+        });
+      });
   });
 });

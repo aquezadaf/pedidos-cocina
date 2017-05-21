@@ -19,6 +19,13 @@ const debeRealizarSolicitud = (llamarApi, getState) => {
   return llamarApi(getState());
 };
 
+const generarFuncionProcesarResultados = (procesarResultados) => {
+  if (procesarResultados) {
+    return procesarResultados;
+  }
+  return (resultado) => resultado;
+};
+
 const apiMiddleware = (urlApi) => {
   if (!urlApi) {
     throw new Error("Se debe especificar una url para consumir la api");
@@ -32,15 +39,17 @@ const apiMiddleware = (urlApi) => {
     validarPropiedadesApi(propiedadesApi);
 
     if (!debeRealizarSolicitud(propiedadesApi.llamarApi, getState)) {
-      return "empty";
+      return;
     }
 
-    const { types, endpoint, nombrePayloadFetch } = propiedadesApi;
+    const { types, endpoint, nombrePayloadFetch, procesarResultados } = propiedadesApi;
     const [INICIO_LLAMADA_API, LLAMADA_API_FINALIZADA, ERROR_LLAMADA_API] = types;
+    const funcionProcesarResultados = generarFuncionProcesarResultados(procesarResultados);
 
     next({ type: INICIO_LLAMADA_API });
     return fetch(`${urlApi}${endpoint}`)
       .then(response => response.json())
+      .then(funcionProcesarResultados)
       .then(response => next({ type: LLAMADA_API_FINALIZADA, [nombrePayloadFetch]: response }))
       .catch(error => next({ type: ERROR_LLAMADA_API, error }));
   };
