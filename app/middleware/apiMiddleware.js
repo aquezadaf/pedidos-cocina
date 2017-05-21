@@ -12,16 +12,28 @@ const validarPropiedadesApi = (propiedadesApi) => {
   }
 };
 
+const debeRealizarSolicitud = (llamarApi, getState) => {
+  if (!llamarApi) {
+    return true;
+  }
+  return llamarApi(getState());
+};
+
 const apiMiddleware = (urlApi) => {
   if (!urlApi) {
     throw new Error("Se debe especificar una url para consumir la api");
   }
-  return () => (next) => (action) => {
+  return ({ getState }) => (next) => (action) => {
     if (!action || !action[LLAMAR_API]) {
       return next(action);
     }
+
     const propiedadesApi = action[LLAMAR_API];
     validarPropiedadesApi(propiedadesApi);
+
+    if (!debeRealizarSolicitud(propiedadesApi.llamarApi, getState)) {
+      return "empty";
+    }
 
     const { types, endpoint, nombrePayloadFetch } = propiedadesApi;
     const [INICIO_LLAMADA_API, LLAMADA_API_FINALIZADA, ERROR_LLAMADA_API] = types;
@@ -33,4 +45,5 @@ const apiMiddleware = (urlApi) => {
       .catch(error => next({ type: ERROR_LLAMADA_API, error }));
   };
 };
+
 export default apiMiddleware;

@@ -4,7 +4,8 @@ const ejecutarAction = (action) => {
   const urlApi = "http://localhost/";
   const middleware = apiMiddleware(urlApi);
   const next = jest.fn();
-  const promesaMiddleware = middleware()(next)(action);
+  const getState = jest.fn();
+  const promesaMiddleware = middleware({ getState })(next)(action);
   return {
     llamadasNext: next.mock.calls,
     promesaMiddleware
@@ -93,5 +94,21 @@ describe("Api Middleware", () => {
     return promesaMiddleware
       .then(() => expect(respuestaMock)
         .toHaveBeenCalledWith("http://localhost/pedidos"));
+  });
+  it("Si el resultado de la funcion llamarApi es verdadero se debe llamar a la api", () => {
+    const { respuestaMock } = mockFetchAccionApiValida();
+    const accionConLlamarApi = { ...accionApiValida };
+    accionConLlamarApi[LLAMAR_API].llamarApi = () => true;
+    const { promesaMiddleware } = ejecutarAction(accionConLlamarApi);
+    return promesaMiddleware
+      .then(() => expect(respuestaMock)
+        .toHaveBeenCalledWith("http://localhost/pedidos"));
+  });
+  it("Si el resultado de la funcion llamarApi es falso no se debe llamar a la api", () => {
+    const accionConLlamarApi = { ...accionApiValida };
+    accionConLlamarApi[LLAMAR_API].llamarApi = () => false;
+    const { llamadasNext } = ejecutarAction(accionConLlamarApi);
+    expect(llamadasNext.length)
+      .toBe(0);
   });
 });
