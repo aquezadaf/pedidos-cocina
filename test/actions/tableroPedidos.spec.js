@@ -1,4 +1,5 @@
 import * as accionesTablero from "../../app/actions/tableroPedidos";
+import { LLAMAR_API } from "../../app/middleware/apiMiddleware";
 
 describe("Acciones Tablero Pedido", () => {
   it("Agregar pedido debe generar accion agregar pedido", () => {
@@ -38,18 +39,33 @@ describe("Acciones Tablero Pedido", () => {
     expect(accionGenerada.socketActions.length)
       .toEqual(3);
   });
-  it("Solicitar pedidos debe generar funcion", () => {
-    const funcionGenerada = accionesTablero.solicitarPedidos();
-    expect(typeof funcionGenerada)
-      .toBe("function");
+  it("Solicitar pedidos debe retornar objeto middleware api", () => {
+    const objetoMiddleware = accionesTablero.solicitarPedidos()[LLAMAR_API];
+    expect(objetoMiddleware)
+      .toHaveProperty("types");
+    expect(objetoMiddleware)
+      .toHaveProperty("endpoint");
+    expect(objetoMiddleware)
+      .toHaveProperty("nombrePayloadFetch");
+    expect(objetoMiddleware)
+      .toHaveProperty("llamarApi");
   });
-  it("Cargar pedidos debe generar accion cargar pedidos", () => {
-    const pedidos = [{ id: 1 }, { id: 2 }, { id: 3 }];
-    const accionGenerada = {
-      type: accionesTablero.CARGAR_PEDIDOS,
-      pedidos
-    };
-    expect(accionesTablero.cargarPedidos(pedidos))
-      .toEqual(accionGenerada);
+  it("Debe llamar api de solicitarPedidos debe retornar falso si esta cargando es verdadero", () => {
+    const llamarApi = accionesTablero.solicitarPedidos()[LLAMAR_API].llamarApi;
+    const debeLlamarApi = llamarApi({ tableroPedidos: { estaCargando: true } });
+    expect(debeLlamarApi)
+      .toBe(false);
+  });
+  it("Debe llamar api de solicitarPedidos debe retornar falso si esta cargando es falso y existen pedidos en el tablero", () => {
+    const llamarApi = accionesTablero.solicitarPedidos()[LLAMAR_API].llamarApi;
+    const debeLlamarApi = llamarApi({ tableroPedidos: { estaCargando: false, pedidos: ["Pedidos"] } });
+    expect(debeLlamarApi)
+      .toBe(false);
+  });
+  it("Debe llamar api de solicitarPedidos debe retornar verdadero si esta cargando es falso y no existen pedidos en el tablero", () => {
+    const llamarApi = accionesTablero.solicitarPedidos()[LLAMAR_API].llamarApi;
+    const debeLlamarApi = llamarApi({ tableroPedidos: { estaCargando: false, pedidos: [] } });
+    expect(debeLlamarApi)
+      .toBe(true);
   });
 });
