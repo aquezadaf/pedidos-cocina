@@ -6,6 +6,7 @@ import { createLogger } from "redux-logger";
 import rootReducer from "../reducers";
 import * as tableroPedidosActions from "../actions/tableroPedidos";
 import webSocketMiddleware from "../middleware/crearWebSocketMiddleware";
+import apiMiddleware from "../middleware/apiMiddleware";
 
 const history = createHashHistory();
 
@@ -16,6 +17,10 @@ const configureStore = (initialState) => {
 
   // Thunk Middleware
   middleware.push(thunk);
+
+  // Api Middleware
+  const api = apiMiddleware(process.env.API_URL);
+  middleware.push(api);
 
   // Logging Middleware
   const logger = createLogger({
