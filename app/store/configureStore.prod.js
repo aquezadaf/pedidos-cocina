@@ -9,7 +9,7 @@ import apiMiddleware from "../middleware/apiMiddleware";
 const history = createBrowserHistory();
 const router = routerMiddleware(history);
 const api = apiMiddleware(process.env.API_URL);
-const enhancer = applyMiddleware(thunk, api, router, webSocketMiddleware);
+const enhancer = applyMiddleware(thunk, api, webSocketMiddleware, router);
 const configureStore = (initialState) => createStore(rootReducer, initialState, enhancer);
 
 export default { configureStore, history };

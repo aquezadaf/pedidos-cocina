@@ -1,48 +1,75 @@
-import webSocketMiddleware from "../../app/middleware/webSocketMiddleware";
+import webSocketMiddleware, { SUBSCRIBIR_WEBSOCKET } from "../../app/middleware/webSocketMiddleware";
 
 const mockSocket = () => {
-  const eventos = {};
+  const eventos = [];
   return {
     on: jest.fn((evento, cb) => {
-      eventos[evento] = cb;
+      eventos.push({ evento, cb });
     }),
-    trigger: (evento) => { eventos[evento](); }
+    trigger: (evento) => {
+      eventos
+        .filter((ev) => ev.evento === evento)
+        .forEach((ev) => ev.cb());
+    }
   };
 };
 
 const generarActionValida = () => ({
-  meta: { subscribirWebSocket: true },
-  socketActions: [{ eventoSocket: "eventoPrueba", actionCreator: () => { } }]
+  [SUBSCRIBIR_WEBSOCKET]: {
+    socketActions: [{ eventoSocket: "eventoPrueba", actionCreator: () => ({ type: "ACCION_PRUEBA" }) }]
+  }
 });
 
-const ejecutarAction = (action) => {
+const generarMiddleware = () => {
   const socket = mockSocket();
-  const middleware = webSocketMiddleware(socket);
-  const dispatch = { dispatch: jest.fn() };
+  const socketMiddleware = webSocketMiddleware(socket);
   const next = jest.fn();
-  middleware(dispatch)(next)(action);
+  const middleware = socketMiddleware()(next);
   return {
+    middleware,
     llamadasSocketOn: socket.on.mock.calls,
-    llamadasDispatch: dispatch.dispatch.mock.calls,
     llamadasNext: next.mock.calls,
     triggerSocket: socket.trigger
   };
 };
 
+const ejecutarAction = (action) => {
+  const { middleware, llamadasSocketOn, llamadasNext, triggerSocket } = generarMiddleware();
+  middleware(action);
+  return {
+    llamadasSocketOn,
+    llamadasNext,
+    triggerSocket
+  };
+};
+
 describe("Web Socket Middleware", () => {
-  it("No debe llamar a socket si action no tiene meta subscribirWebSocket", () => {
-    const action = {};
+  it("Si action no tiene propiedad subscripcion debe ejecutar next con el action recibido", () => {
+    const action = { test: true };
+    const { llamadasNext } = ejecutarAction(action);
+    const parametroNext = llamadasNext[0][0];
+    expect(parametroNext)
+      .toEqual(action);
+  });
+  it("Debe arrojar error si no se envia socketActions", () => {
+    const action = { [SUBSCRIBIR_WEBSOCKET]: {} };
+    expect(() => {
+      ejecutarAction(action);
+    }).toThrow("No se encontro propiedad socketActions");
+  });
+  it("Debe arrojar error si no se envia arreglo en socketActions", () => {
+    const action = { [SUBSCRIBIR_WEBSOCKET]: { socketActions: "array" } };
+    expect(() => {
+      ejecutarAction(action);
+    }).toThrow("La propiedad socketActions debe ser un arreglo");
+  });
+  it("No debe asociar evento a socket si no contiene acciones", () => {
+    const action = { [SUBSCRIBIR_WEBSOCKET]: { socketActions: [] } };
     const { llamadasSocketOn } = ejecutarAction(action);
     expect(llamadasSocketOn.length)
       .toEqual(0);
   });
-  it("No debe asociar evento a socket si action tiene meta subscribirWebSocket y no contiene acciones", () => {
-    const action = { meta: { subscribirWebSocket: true }, socketActions: [] };
-    const { llamadasSocketOn } = ejecutarAction(action);
-    expect(llamadasSocketOn.length)
-      .toEqual(0);
-  });
-  it("Debe asociar evento a socket si action tiene meta subscribirWebSocket y acciones", () => {
+  it("Debe asociar evento a socket si contiene acciones", () => {
     const action = generarActionValida();
     const { llamadasSocketOn } = ejecutarAction(action);
     const eventoAsociado = llamadasSocketOn[0][0];
@@ -51,16 +78,25 @@ describe("Web Socket Middleware", () => {
     expect(eventoAsociado)
       .toEqual("eventoPrueba");
   });
-  it("Debe ejecutar Next independiente de los parametros de entrada", () => {
-    const { llamadasNext } = ejecutarAction({});
+  it("Debe ejecutar next con el resultado de action creator al ejecutar evento de socket", () => {
+    const action = generarActionValida();
+    const { llamadasNext, triggerSocket } = ejecutarAction(action);
+    triggerSocket("eventoPrueba");
+    const parametroNext = llamadasNext[0][0];
+    const resultadoActionCreator = action[SUBSCRIBIR_WEBSOCKET].socketActions[0].actionCreator();
     expect(llamadasNext.length)
       .toEqual(1);
+    expect(parametroNext)
+      .toEqual(resultadoActionCreator);
   });
-  it("Debe ejecutar dispatch al ejecutar evento de socket", () => {
+  it("No debe permitir subscribirse al mismo mas de una vez", () => {
     const action = generarActionValida();
-    const { llamadasDispatch, triggerSocket } = ejecutarAction(action);
+    const { middleware, triggerSocket, llamadasNext } = generarMiddleware();
+    middleware(action);
+    middleware(action);
+    middleware(action);
     triggerSocket("eventoPrueba");
-    expect(llamadasDispatch.length)
+    expect(llamadasNext.length)
       .toEqual(1);
   });
 });

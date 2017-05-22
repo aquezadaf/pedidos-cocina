@@ -1,5 +1,6 @@
 import * as accionesTablero from "../../app/actions/tableroPedidos";
 import { LLAMAR_API } from "../../app/middleware/apiMiddleware";
+import { SUBSCRIBIR_WEBSOCKET } from "../../app/middleware/webSocketMiddleware";
 
 describe("Acciones Tablero Pedido", () => {
   it("Agregar pedido debe generar accion agregar pedido", () => {
@@ -29,14 +30,14 @@ describe("Acciones Tablero Pedido", () => {
     expect(accionesTablero.aumentarPrioridadPedido(id))
       .toEqual(accionGenerada);
   });
-  it("Subscribir cambios pedidos debe contener meta de subscripcion", () => {
+  it("Subscribir cambios pedidos debe contener propiedad subscripcion web socket", () => {
     const accionGenerada = accionesTablero.subscribirCambiosPedidos();
-    expect(accionGenerada.meta)
-      .toEqual({ subscribirWebSocket: true });
+    expect(accionGenerada)
+      .toHaveProperty(SUBSCRIBIR_WEBSOCKET);
   });
   it("Subscribir cambios pedidos debe contener los eventos del socket", () => {
     const accionGenerada = accionesTablero.subscribirCambiosPedidos();
-    expect(accionGenerada.socketActions.length)
+    expect(accionGenerada[SUBSCRIBIR_WEBSOCKET].socketActions.length)
       .toEqual(3);
   });
   it("Solicitar pedidos debe retornar objeto middleware api", () => {
