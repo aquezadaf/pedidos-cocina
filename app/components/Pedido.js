@@ -14,14 +14,14 @@ export default class Pedido extends Component {
     nombre: string,
     prioridad: number,
     fechaSolicitud: Date,
-    ordenes: [{
+    ordenes: Array<{
       id: number,
       cantidad: number,
       nombre: string
-    }]
+    }>
   };
 
-  prioridadEnRangoValido() {
+  prioridadEnRangoValido(): number {
     const cantidadColores = coloresPrioridades.length - 1;
     const { prioridad } = this.props;
     if (prioridad > cantidadColores) {
@@ -32,7 +32,7 @@ export default class Pedido extends Component {
     return prioridad;
   }
 
-  clasePrioridadPedido() {
+  clasePrioridadPedido(): string {
     const prioridad = this.prioridadEnRangoValido();
     return [
       style.pedido,

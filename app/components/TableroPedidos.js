@@ -4,22 +4,28 @@ import FlipMove from "react-flip-move";
 import Pedido from "./Pedido";
 import style from "./TableroPedidos.css";
 
+type PedidoType = {
+  id: number,
+  nombre: string,
+  prioridad: number,
+  fechaSolicitud: Date,
+  ordenes: Array<{
+    id: number,
+    cantidad: number,
+    nombre: string
+  }>
+};
+
 export default class TableroPedidos extends Component {
   props: {
-    pedidos: [{
-      id: number,
-      nombre: string,
-      prioridad: number,
-      fechaSolicitud: Date,
-      ordenes: []
-    }],
+    pedidos: Array<PedidoType>,
     solicitarPedidos: () => {},
     subscribirCambiosPedidos: () => {}
   };
 
   // Ordenan los pedidos segun su prioridad de manera descendente
   // y luego por su fecha de solicitud de manera ascendente
-  static determinarOrdenPedidos(primerPedido, segundoPedido) {
+  static determinarOrdenPedidos(primerPedido: PedidoType, segundoPedido: PedidoType): number {
     const diferenciaPrioridad = segundoPedido.prioridad - primerPedido.prioridad;
     if (diferenciaPrioridad !== 0) {
       return diferenciaPrioridad;
@@ -32,7 +38,7 @@ export default class TableroPedidos extends Component {
     this.props.subscribirCambiosPedidos();
   }
 
-  pedidosOrdenados() {
+  pedidosOrdenados(): Array<PedidoType> {
     const { pedidos } = this.props;
     // Se clona los pedidos para no modificarlos con sort
     return []

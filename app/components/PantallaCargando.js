@@ -24,7 +24,7 @@ const PantallaCargando = ({ estaCargando, children }: Props) => {
 
 export default PantallaCargando;
 
-export const conectarPantallaCargando = (Componente) => (props) => (
+export const conectarPantallaCargando = (Componente: Children) => (props: Props) => (
   <PantallaCargando {...props}>
     <Componente {...props} />
   </PantallaCargando>
