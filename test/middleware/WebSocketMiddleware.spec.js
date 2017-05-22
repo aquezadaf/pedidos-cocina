@@ -36,6 +36,18 @@ describe("Web Socket Middleware", () => {
     expect(parametroNext)
       .toEqual(action);
   });
+  it("Debe arrojar error si no se envia socketActions", () => {
+    const action = { [SUBSCRIBIR_WEBSOCKET]: {} };
+    expect(() => {
+      ejecutarAction(action);
+    }).toThrow("No se encontro propiedad socketActions");
+  });
+  it("Debe arrojar error si no se envia arreglo en socketActions", () => {
+    const action = { [SUBSCRIBIR_WEBSOCKET]: { socketActions: "array" } };
+    expect(() => {
+      ejecutarAction(action);
+    }).toThrow("La propiedad socketActions debe ser un arreglo");
+  });
   it("No debe asociar evento a socket si no contiene acciones", () => {
     const action = { [SUBSCRIBIR_WEBSOCKET]: { socketActions: [] } };
     const { llamadasSocketOn } = ejecutarAction(action);
