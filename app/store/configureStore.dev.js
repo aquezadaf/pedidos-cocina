@@ -22,6 +22,9 @@ const configureStore = (initialState) => {
   const api = apiMiddleware(process.env.API_URL);
   middleware.push(api);
 
+  // WebSocket middleware
+  middleware.push(webSocketMiddleware);
+
   // Logging Middleware
   const logger = createLogger({
     level: "info",
@@ -32,9 +35,6 @@ const configureStore = (initialState) => {
   // Router Middleware
   const router = routerMiddleware(history);
   middleware.push(router);
-
-  // WebSocket middleware
-  middleware.push(webSocketMiddleware);
 
   // Redux DevTools Configuration
   const actionCreators = {
