@@ -1,17 +1,6 @@
+// @flow
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import style from "./Pedido.css";
-
-const propTypes = {
-  nombre: PropTypes.string.isRequired,
-  prioridad: PropTypes.number.isRequired,
-  fechaSolicitud: PropTypes.instanceOf(Date).isRequired,
-  ordenes: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    cantidad: PropTypes.number.isRequired,
-    nombre: PropTypes.string.isRequired,
-  })).isRequired
-};
 
 const coloresPrioridades = [
   style.prioridadBaja,
@@ -20,8 +9,19 @@ const coloresPrioridades = [
   style.prioridadMuyAlta
 ];
 
-class Pedido extends Component {
-  prioridadEnRangoValido() {
+export default class Pedido extends Component {
+  props: {
+    nombre: string,
+    prioridad: number,
+    fechaSolicitud: Date,
+    ordenes: Array<{
+      id: number,
+      cantidad: number,
+      nombre: string
+    }>
+  };
+
+  prioridadEnRangoValido(): number {
     const cantidadColores = coloresPrioridades.length - 1;
     const { prioridad } = this.props;
     if (prioridad > cantidadColores) {
@@ -32,7 +32,7 @@ class Pedido extends Component {
     return prioridad;
   }
 
-  clasePrioridadPedido() {
+  clasePrioridadPedido(): string {
     const prioridad = this.prioridadEnRangoValido();
     return [
       style.pedido,
@@ -64,7 +64,3 @@ class Pedido extends Component {
     );
   }
 }
-
-Pedido.propTypes = propTypes;
-
-export default Pedido;

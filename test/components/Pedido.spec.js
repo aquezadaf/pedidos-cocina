@@ -1,13 +1,14 @@
+// @flow
 import { shallow } from "enzyme";
 import React from "react";
 import Pedido from "../../app/components/Pedido";
 
-const crearPedidoPrioridad = (prioridad) => {
+const crearPedidoPrioridad = (prioridad: number) => {
   const props = {
     nombre: "Pedido 1",
     prioridad,
     fechaSolicitud: new Date(2017, 0, 1, 1, 1, 1),
-    ordenes: []
+    ordenes: [{ id: 1, nombre: "Orden 1", cantidad: 1 }]
   };
 
   const pedidoEnzyme = shallow(<Pedido {...props} />);
@@ -30,6 +31,13 @@ describe("Componente Pedido", () => {
     const { pedidoEnzyme, props } = crearPedido();
     expect(pedidoEnzyme.find(".orden").length)
       .toBe(props.ordenes.length);
+  });
+  it("La orden debe tener nombre y cantidad de platos pedidos", () => {
+    const { pedidoEnzyme, props } = crearPedido();
+    const { cantidad, nombre } = props.ordenes[0];
+    const textoOrden = `${cantidad} x ${nombre}`;
+    expect(pedidoEnzyme.find(".orden").first().text())
+      .toEqual(textoOrden);
   });
   it("Debe desplegar la fecha en el formato local de la fecha en que se ejecute la aplicacion", () => {
     const { pedidoEnzyme, props } = crearPedido();

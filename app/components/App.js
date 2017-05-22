@@ -1,13 +1,14 @@
+// @flow
 import React from "react";
-import PropTypes from "prop-types";
+import type { Children } from "react";
 import MenuNavegacion from "./MenuNavegacion";
 import style from "./App.css";
 
-const propTypes = {
-  children: PropTypes.element.isRequired
+type Props = {
+  children: Children
 };
 
-const App = ({ children }) => (
+export default ({ children }: Props) => (
   <div className={style.app}>
     <div className={style.menu}>
       <MenuNavegacion />
@@ -17,7 +18,3 @@ const App = ({ children }) => (
     </div>
   </div>
 );
-
-App.propTypes = propTypes;
-
-export default App;
