@@ -1,13 +1,14 @@
+// @flow
 import React from "react";
-import PropTypes from "prop-types";
+import type { Children } from "react";
 import style from "./PantallaCargando.css";
 
-const propTypes = {
-  estaCargando: PropTypes.bool.isRequired,
-  children: PropTypes.element.isRequired
+type Props = {
+  estaCargando: boolean,
+  children: Children
 };
 
-const PantallaCargando = ({ estaCargando, children }) => {
+const PantallaCargando = ({ estaCargando, children }: Props) => {
   if (estaCargando) {
     return (
       <div className={style.spinner}>
@@ -20,8 +21,6 @@ const PantallaCargando = ({ estaCargando, children }) => {
   }
   return children;
 };
-
-PantallaCargando.propTypes = propTypes;
 
 export default PantallaCargando;
 

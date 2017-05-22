@@ -1,12 +1,12 @@
+// @flow
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 
-const propTypes = {
-  platosMenu: PropTypes.arrayOf(PropTypes.string).isRequired,
-  solicitarMenuRestaurante: PropTypes.func.isRequired
-};
+export default class MenuRestaurante extends Component {
+  props: {
+    platosMenu: Array<string>,
+    solicitarMenuRestaurante: () => {}
+  }
 
-class MenuRestaurante extends Component {
   componentDidMount() {
     this.props.solicitarMenuRestaurante();
   }
@@ -26,7 +26,3 @@ class MenuRestaurante extends Component {
     );
   }
 }
-
-MenuRestaurante.propTypes = propTypes;
-
-export default MenuRestaurante;

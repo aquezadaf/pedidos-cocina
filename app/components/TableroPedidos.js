@@ -1,22 +1,22 @@
+// @flow
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import FlipMove from "react-flip-move";
 import Pedido from "./Pedido";
 import style from "./TableroPedidos.css";
 
-const propTypes = {
-  pedidos: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.number.isRequired,
-    nombre: PropTypes.string.isRequired,
-    prioridad: PropTypes.number.isRequired,
-    fechaSolicitud: PropTypes.instanceOf(Date).isRequired,
-    ordenes: PropTypes.array.isRequired
-  })).isRequired,
-  subscribirCambiosPedidos: PropTypes.func.isRequired,
-  solicitarPedidos: PropTypes.func.isRequired
-};
+export default class TableroPedidos extends Component {
+  props: {
+    pedidos: [{
+      id: number,
+      nombre: string,
+      prioridad: number,
+      fechaSolicitud: Date,
+      ordenes: []
+    }],
+    solicitarPedidos: () => {},
+    subscribirCambiosPedidos: () => {}
+  };
 
-class TableroPedidos extends Component {
   // Ordenan los pedidos segun su prioridad de manera descendente
   // y luego por su fecha de solicitud de manera ascendente
   static determinarOrdenPedidos(primerPedido, segundoPedido) {
@@ -55,7 +55,3 @@ class TableroPedidos extends Component {
     );
   }
 }
-
-TableroPedidos.propTypes = propTypes;
-
-export default TableroPedidos;
