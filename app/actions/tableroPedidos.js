@@ -1,10 +1,10 @@
 import * as eventosWebSocket from "../utils/eventosWebSocket";
+import { SUBSCRIBIR_WEBSOCKET } from "../middleware/webSocketMiddleware";
 import { LLAMAR_API } from "../middleware/apiMiddleware";
 
 export const AGREGAR_PEDIDO = "AGREGAR_PEDIDO";
 export const ELIMINAR_PEDIDO = "ELIMINAR_PEDIDO";
 export const AUMENTAR_PRIORIDAD_PEDIDO = "AUMENTAR_PRIORIDAD_PEDIDO";
-export const SUBSCRIBIR_CAMBIOS_PEDIDOS = "SUBSCRIBIR_CAMBIOS_PEDIDOS";
 export const SOLICITAR_PEDIDOS = "SOLICITAR_PEDIDOS";
 export const CARGAR_PEDIDOS = "CARGAR_PEDIDOS";
 export const ERROR_SOLICITUD_PEDIDOS = "ERROR_SOLICITUD_PEDIDOS";
@@ -37,18 +37,18 @@ const cambiarTipoFechaSolicitud = (pedido) => {
 const agregarPedidoWebSocket = (pedido) => agregarPedido(cambiarTipoFechaSolicitud(pedido));
 
 export const subscribirCambiosPedidos = () => ({
-  type: SUBSCRIBIR_CAMBIOS_PEDIDOS,
-  meta: { subscribirWebSocket: true },
-  socketActions: [{
-    eventoSocket: eventosWebSocket.PEDIDO_NUEVO,
-    actionCreator: agregarPedidoWebSocket
-  }, {
-    eventoSocket: eventosWebSocket.PEDIDO_FINALIZADO,
-    actionCreator: eliminarPedido
-  }, {
-    eventoSocket: eventosWebSocket.PEDIDO_AUMENTAR_PRIORIDAD,
-    actionCreator: aumentarPrioridadPedido
-  }]
+  [SUBSCRIBIR_WEBSOCKET]: {
+    socketActions: [{
+      eventoSocket: eventosWebSocket.PEDIDO_NUEVO,
+      actionCreator: agregarPedidoWebSocket
+    }, {
+      eventoSocket: eventosWebSocket.PEDIDO_FINALIZADO,
+      actionCreator: eliminarPedido
+    }, {
+      eventoSocket: eventosWebSocket.PEDIDO_AUMENTAR_PRIORIDAD,
+      actionCreator: aumentarPrioridadPedido
+    }]
+  }
 });
 
 const debeObtenerPedidos = ({ tableroPedidos }) => {
