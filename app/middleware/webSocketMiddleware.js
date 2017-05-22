@@ -9,17 +9,36 @@ const validarAction = (actionSubscripcion) => {
   }
 };
 
-const webSocketMiddleware = socket => () => next => action => {
-  if (!action || !action[SUBSCRIBIR_WEBSOCKET]) {
-    return next(action);
-  }
-  validarAction(action[SUBSCRIBIR_WEBSOCKET]);
-  const { socketActions } = action[SUBSCRIBIR_WEBSOCKET];
-  socketActions.forEach((actionCreator) => {
+const webSocketMiddleware = socket => {
+  const eventosSubscritos = [];
+
+  const debeSubscribirEvento = (actionCreator) => {
+    const { eventoSocket } = actionCreator;
+    return eventosSubscritos.indexOf(eventoSocket) === -1;
+  };
+
+  const subscribirEvento = (actionCreator, next) => {
     socket.on(actionCreator.eventoSocket, (datosSocket) => {
       next(actionCreator.actionCreator(datosSocket));
     });
-  });
+    eventosSubscritos.push(actionCreator.eventoSocket);
+  };
+
+  const middleware = () => next => action => {
+    if (!action || !action[SUBSCRIBIR_WEBSOCKET]) {
+      return next(action);
+    }
+
+    validarAction(action[SUBSCRIBIR_WEBSOCKET]);
+    const { socketActions } = action[SUBSCRIBIR_WEBSOCKET];
+
+    socketActions.forEach((actionCreator) => {
+      if (debeSubscribirEvento(actionCreator)) {
+        subscribirEvento(actionCreator, next);
+      }
+    });
+  };
+  return middleware;
 };
 
 export default webSocketMiddleware;

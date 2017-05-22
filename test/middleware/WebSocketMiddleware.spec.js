@@ -1,12 +1,16 @@
 import webSocketMiddleware, { SUBSCRIBIR_WEBSOCKET } from "../../app/middleware/webSocketMiddleware";
 
 const mockSocket = () => {
-  const eventos = {};
+  const eventos = [];
   return {
     on: jest.fn((evento, cb) => {
-      eventos[evento] = cb;
+      eventos.push({ evento, cb });
     }),
-    trigger: (evento) => { eventos[evento](); }
+    trigger: (evento) => {
+      eventos
+        .filter((ev) => ev.evento === evento)
+        .forEach((ev) => ev.cb());
+    }
   };
 };
 
@@ -16,15 +20,26 @@ const generarActionValida = () => ({
   }
 });
 
-const ejecutarAction = (action) => {
+const generarMiddleware = () => {
   const socket = mockSocket();
-  const middleware = webSocketMiddleware(socket);
+  const socketMiddleware = webSocketMiddleware(socket);
   const next = jest.fn();
-  middleware()(next)(action);
+  const middleware = socketMiddleware()(next);
   return {
+    middleware,
     llamadasSocketOn: socket.on.mock.calls,
     llamadasNext: next.mock.calls,
     triggerSocket: socket.trigger
+  };
+};
+
+const ejecutarAction = (action) => {
+  const { middleware, llamadasSocketOn, llamadasNext, triggerSocket } = generarMiddleware();
+  middleware(action);
+  return {
+    llamadasSocketOn,
+    llamadasNext,
+    triggerSocket
   };
 };
 
@@ -68,10 +83,20 @@ describe("Web Socket Middleware", () => {
     const { llamadasNext, triggerSocket } = ejecutarAction(action);
     triggerSocket("eventoPrueba");
     const parametroNext = llamadasNext[0][0];
-    const resultadoActionCreatos = action[SUBSCRIBIR_WEBSOCKET].socketActions[0].actionCreator();
+    const resultadoActionCreator = action[SUBSCRIBIR_WEBSOCKET].socketActions[0].actionCreator();
     expect(llamadasNext.length)
       .toEqual(1);
     expect(parametroNext)
-      .toEqual(resultadoActionCreatos);
+      .toEqual(resultadoActionCreator);
+  });
+  it("No debe permitir subscribirse al mismo mas de una vez", () => {
+    const action = generarActionValida();
+    const { middleware, triggerSocket, llamadasNext } = generarMiddleware();
+    middleware(action);
+    middleware(action);
+    middleware(action);
+    triggerSocket("eventoPrueba");
+    expect(llamadasNext.length)
+      .toEqual(1);
   });
 });
