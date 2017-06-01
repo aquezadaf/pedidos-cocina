@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from "react";
+import PlatoMenu from "./PlatoMenu";
 import style from "./MenuRestaurante.css";
 
 export default class MenuRestaurante extends Component {
@@ -8,7 +9,6 @@ export default class MenuRestaurante extends Component {
       id: number,
       nombre: string,
       descripcion: string,
-      precio: number,
       tiempoAproximadoPreparacion: number,
       urlFotoPlato: string,
       habilitado: boolean
@@ -34,34 +34,7 @@ export default class MenuRestaurante extends Component {
     return (
       <div className={style.menu}>
         {
-          platosMenu.map((platoMenu) => (
-            <div key={platoMenu.id} className={style.platoMenu}>
-              <h4 className={style.tituloPlatoMenu}>
-                {platoMenu.nombre}
-              </h4>
-              <div className={style.contenidoPlatoMenu}>
-                <div className={style.contenedorFotoBoton}>
-                  <img
-                    className={style.fotoPlato}
-                    src={platoMenu.urlFotoPlato}
-                    alt={platoMenu.nombre}
-                  />
-                  {MenuRestaurante.generarBotonPlatoMenu(platoMenu.habilitado)}
-                </div>
-                <div className={style.descripcionPlato}>
-                  <div>
-                    {platoMenu.descripcion}
-                  </div>
-                  <div>
-                    Precio: $ {platoMenu.precio}
-                  </div>
-                  <div>
-                    Tiempo preparacion: {platoMenu.tiempoAproximadoPreparacion} minutos
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))
+          platosMenu.map((platoMenu) => <PlatoMenu key={platoMenu.id} {...platoMenu} />)
         }
       </div>
     );
