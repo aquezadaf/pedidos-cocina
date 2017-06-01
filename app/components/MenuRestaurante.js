@@ -13,7 +13,9 @@ export default class MenuRestaurante extends Component {
       urlFotoPlato: string,
       habilitado: boolean
     }>,
-    solicitarMenuRestaurante: () => {}
+    solicitarMenuRestaurante: () => void,
+    habilitarPlatoMenu: (id: number) => void,
+    deshabilitarPlatoMenu: (id: number) => void
   }
 
   componentDidMount() {
@@ -21,11 +23,18 @@ export default class MenuRestaurante extends Component {
   }
 
   render() {
-    const { platosMenu } = this.props;
+    const { platosMenu, habilitarPlatoMenu, deshabilitarPlatoMenu } = this.props;
     return (
       <div className={style.menu}>
         {
-          platosMenu.map((platoMenu) => <PlatoMenu key={platoMenu.id} {...platoMenu} />)
+          platosMenu.map((platoMenu) => (
+            <PlatoMenu
+              key={platoMenu.id}
+              habilitarPlatoMenu={habilitarPlatoMenu}
+              deshabilitarPlatoMenu={deshabilitarPlatoMenu}
+              {...platoMenu}
+            />
+          ))
         }
       </div>
     );
