@@ -10,7 +10,9 @@ const crearMenuRestaurante = () => {
       { id: 2, nombre: "Segundo plato", descripcion: "Plato", urlFotoPlato: "", tiempoAproximadoPreparacion: 10, habilitado: true },
       { id: 3, nombre: "Tercer plato", descripcion: "Plato", urlFotoPlato: "", tiempoAproximadoPreparacion: 10, habilitado: false }
     ],
-    solicitarMenuRestaurante: jest.fn()
+    solicitarMenuRestaurante: jest.fn(),
+    habilitarPlatoMenu: () => { },
+    deshabilitarPlatoMenu: () => { }
   };
 
   const menuEnzyme = mount(<MenuRestaurante {...props} />);
