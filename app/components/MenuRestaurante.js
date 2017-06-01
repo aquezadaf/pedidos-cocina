@@ -10,7 +10,8 @@ export default class MenuRestaurante extends Component {
       descripcion: string,
       precio: number,
       tiempoAproximadoPreparacion: number,
-      urlFotoPlato: string
+      urlFotoPlato: string,
+      habilitado: boolean
     }>,
     solicitarMenuRestaurante: () => {}
   }
@@ -30,21 +31,24 @@ export default class MenuRestaurante extends Component {
                 {platoMenu.nombre}
               </h4>
               <div className={style.contenidoPlatoMenu}>
-                <div className={style.contenedorFoto}>
+                <div className={style.contenedorFotoBoton}>
                   <img
                     className={style.fotoPlato}
                     src={platoMenu.urlFotoPlato}
                     alt={platoMenu.nombre}
                   />
+                  <button className={style.boton}>Deshabilitar</button>
                 </div>
-                <div>
-                  {platoMenu.descripcion}
-                </div>
-                <div>
-                  Precio: $ {platoMenu.precio}
-                </div>
-                <div>
-                  Tiempo preparacion: {platoMenu.tiempoAproximadoPreparacion} minutos
+                <div className={style.descripcionPlato}>
+                  <div>
+                    {platoMenu.descripcion}
+                  </div>
+                  <div>
+                    Precio: $ {platoMenu.precio}
+                  </div>
+                  <div>
+                    Tiempo preparacion: {platoMenu.tiempoAproximadoPreparacion} minutos
+                  </div>
                 </div>
               </div>
             </div>
