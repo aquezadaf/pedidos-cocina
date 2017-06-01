@@ -1,0 +1,32 @@
+.menu {
+  height: 100%;
+  overflow: scroll;
+  display: grid;
+  grid-gap: 2%;
+  grid-template-columns: 49% 49%;
+}
+
+.platoMenu {
+  background-color: rgba(61, 61, 61, 0.5);
+  color: #fff;
+  border: 2px solid #fff;
+}
+
+.tituloPlatoMenu {
+  background-color: rgb(61, 61, 61);
+  text-align: center;
+  margin: 0px;
+  padding: 4px;
+}
+
+.contenidoPlatoMenu {
+  padding: 5px;
+}
+
+.contenedorFoto {
+  width: 100%;
+}
+
+.fotoPlato {
+  width: 100%;
+}
