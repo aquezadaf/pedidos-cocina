@@ -6,9 +6,9 @@ import MenuRestaurante from "../../app/components/MenuRestaurante";
 const crearMenuRestaurante = () => {
   const props = {
     platosMenu: [
-      { id: 1, nombre: "Primer plato", descripcion: "Plato", precio: 1000, urlFotoPlato: "", tiempoAproximadoPreparacion: 10 },
-      { id: 2, nombre: "Segundo plato", descripcion: "Plato", precio: 1000, urlFotoPlato: "", tiempoAproximadoPreparacion: 10 },
-      { id: 3, nombre: "Tercer plato", descripcion: "Plato", precio: 100, urlFotoPlato: "", tiempoAproximadoPreparacion: 10 }
+      { id: 1, nombre: "Primer plato", descripcion: "Plato", urlFotoPlato: "", tiempoAproximadoPreparacion: 10, habilitado: true },
+      { id: 2, nombre: "Segundo plato", descripcion: "Plato", urlFotoPlato: "", tiempoAproximadoPreparacion: 10, habilitado: true },
+      { id: 3, nombre: "Tercer plato", descripcion: "Plato", urlFotoPlato: "", tiempoAproximadoPreparacion: 10, habilitado: false }
     ],
     solicitarMenuRestaurante: jest.fn()
   };
@@ -29,7 +29,7 @@ describe("Componente Menu Restaurante", () => {
   });
   it("Debe mostrar todos los platos del menu", () => {
     const { menuEnzyme, props } = crearMenuRestaurante();
-    const platosEnComponente = menuEnzyme.find("div > div > h4").length;
+    const platosEnComponente = menuEnzyme.find("PlatoMenu").length;
     expect(platosEnComponente)
       .toBe(props.platosMenu.length);
   });
