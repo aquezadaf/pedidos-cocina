@@ -31,4 +31,22 @@ describe("Acciones Menu Restaurante", () => {
     expect(debeLlamarApi)
       .toBe(true);
   });
+  it("Habilitar plato menu debe generar accion habilitar plato menu", () => {
+    const idPlatoMenu = 1;
+    const accionGenerada = {
+      type: accionesMenu.HABILITAR_PLATO_MENU,
+      idPlatoMenu
+    };
+    expect(accionesMenu.habilitarPlatoMenu(idPlatoMenu))
+      .toEqual(accionGenerada);
+  });
+  it("Deshabilitar plato menu debe generar accion deshabilitar plato menu", () => {
+    const idPlatoMenu = 1;
+    const accionGenerada = {
+      type: accionesMenu.DESHABILITAR_PLATO_MENU,
+      idPlatoMenu
+    };
+    expect(accionesMenu.deshabilitarPlatoMenu(idPlatoMenu))
+      .toEqual(accionGenerada);
+  });
 });
