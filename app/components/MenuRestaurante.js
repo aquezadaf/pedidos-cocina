@@ -16,15 +16,6 @@ export default class MenuRestaurante extends Component {
     solicitarMenuRestaurante: () => {}
   }
 
-  static generarBotonPlatoMenu(platoHabilitado: boolean) {
-    if (platoHabilitado) {
-      const claseBoton = `${style.boton} ${style.botonDeshabilitar}`;
-      return <button className={claseBoton}>Deshabilitar</button>;
-    }
-    const claseBoton = `${style.boton} ${style.botonHabilitar}`;
-    return <button className={claseBoton}>Habilitar</button>;
-  }
-
   componentDidMount() {
     this.props.solicitarMenuRestaurante();
   }
