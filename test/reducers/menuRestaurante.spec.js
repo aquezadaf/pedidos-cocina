@@ -1,7 +1,9 @@
 import menuRestaurante from "../../app/reducers/menuRestaurante";
 import {
   SOLICITAR_MENU_RESTAURANTE,
-  CARGAR_MENU_RESTAURANTE
+  CARGAR_MENU_RESTAURANTE,
+  HABILITAR_PLATO_MENU,
+  DESHABILITAR_PLATO_MENU
 } from "../../app/actions/menuRestaurante";
 
 describe("Reducer Menu Restaurante", () => {
@@ -30,6 +32,56 @@ describe("Reducer Menu Restaurante", () => {
     const estadoGenerado = menuRestaurante(estadoInicial, {
       type: CARGAR_MENU_RESTAURANTE,
       platosMenu: platosCarga
+    });
+    expect(estadoGenerado)
+      .toEqual(nuevoEstado);
+  });
+  it("Habilitar plato menu debe dejar habilitado en verdadero para el plato seleccionado", () => {
+    const estadoInicial = {
+      platosMenu: [
+        { id: 1, habilitado: false },
+        { id: 2, habilitado: true },
+        { id: 3, habilitado: false }
+      ],
+      estaCargando: false
+    };
+    const idPlatoMenu = 3;
+    const nuevoEstado = {
+      platosMenu: [
+        { id: 1, habilitado: false },
+        { id: 2, habilitado: true },
+        { id: 3, habilitado: true }
+      ],
+      estaCargando: false
+    };
+    const estadoGenerado = menuRestaurante(estadoInicial, {
+      type: HABILITAR_PLATO_MENU,
+      idPlatoMenu
+    });
+    expect(estadoGenerado)
+      .toEqual(nuevoEstado);
+  });
+  it("Deshabilitar plato menu debe dejar habilitado en falso para el plato seleccionado", () => {
+    const estadoInicial = {
+      platosMenu: [
+        { id: 1, habilitado: false },
+        { id: 2, habilitado: true },
+        { id: 3, habilitado: false }
+      ],
+      estaCargando: false
+    };
+    const idPlatoMenu = 2;
+    const nuevoEstado = {
+      platosMenu: [
+        { id: 1, habilitado: false },
+        { id: 2, habilitado: false },
+        { id: 3, habilitado: false }
+      ],
+      estaCargando: false
+    };
+    const estadoGenerado = menuRestaurante(estadoInicial, {
+      type: DESHABILITAR_PLATO_MENU,
+      idPlatoMenu
     });
     expect(estadoGenerado)
       .toEqual(nuevoEstado);

@@ -1,0 +1,7 @@
+.menu {
+  height: 100%;
+  overflow: scroll;
+  display: grid;
+  grid-gap: 1%;
+  grid-template-columns: 49% 49%;
+}
