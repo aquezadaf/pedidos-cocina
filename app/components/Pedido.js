@@ -1,5 +1,6 @@
 // @flow
 import React, { Component } from "react";
+import { Link, Redirect } from "react-router-dom";
 import style from "./Pedido.css";
 
 const coloresPrioridades = [
@@ -11,6 +12,7 @@ const coloresPrioridades = [
 
 export default class Pedido extends Component {
   props: {
+    id: number,
     nombre: string,
     prioridad: number,
     fechaSolicitud: Date,
@@ -41,13 +43,13 @@ export default class Pedido extends Component {
   }
 
   render() {
-    const { nombre, fechaSolicitud, ordenes } = this.props;
+    const { id, nombre, fechaSolicitud, ordenes } = this.props;
     const nombreClasePedido = this.clasePrioridadPedido();
     return (
       <div className={nombreClasePedido}>
-        <div className={style.nombre}>
+        <Link to={`/pedido/${id}`} className={style.nombre}>
           {nombre}
-        </div>
+        </Link>
         <div className={style.ordenes}>
           {
             ordenes.map((orden) => (
@@ -60,6 +62,8 @@ export default class Pedido extends Component {
         <div className={style.fecha}>
           {fechaSolicitud.toLocaleString()}
         </div>
+
+
       </div>
     );
   }
