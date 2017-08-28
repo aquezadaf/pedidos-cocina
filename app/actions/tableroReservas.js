@@ -23,7 +23,7 @@ const debeObtenerReservas = ({ tableroReservas }) => {
   return true;
 };
 
-export const solicitarPedidos = () => ({
+export const solicitarReservas = () => ({
   [LLAMAR_API]: {
     types: [SOLICITAR_RESERVAS, CARGAR_RESERVAS, ERROR_SOLICITUD_RESERVAS],
     endpoint: "reservas",
