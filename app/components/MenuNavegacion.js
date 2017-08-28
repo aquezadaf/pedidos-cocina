@@ -7,8 +7,7 @@ const elementosMenu = [
   { path: "/", texto: "Inicio", icono: "fa-home" },
   { path: "/pedidos", texto: "Pedidos", icono: "fa-male" },
   { path: "/reservas", texto: "Reservas", icono: "fa-mobile-phone" },
-  { path: "/menu", texto: "Menu", icono: "fa-cutlery" },
-  { path: "/configuracion", texto: "Configuración", icono: "fa-gears" }
+  { path: "/menu", texto: "Menu", icono: "fa-cutlery" }
 ];
 
 export default class MenuNavegacion extends Component {
