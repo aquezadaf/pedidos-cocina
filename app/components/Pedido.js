@@ -62,8 +62,6 @@ export default class Pedido extends Component {
         <div className={style.fecha}>
           {fechaSolicitud.toLocaleString()}
         </div>
-
-
       </div>
     );
   }
