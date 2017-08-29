@@ -2,15 +2,15 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import TableroReservas from "../components/TableroReservas";
 import { conectarPantallaCargando } from "../components/PantallaCargando";
-import * as accionesTableroReservas from "../actions/tableroReservas";
+import { solicitarReservas } from "../actions/tableroReservas";
 
-// const mapStateToProps = ({ menuRestaurante }) => ({
-//   platosMenu: menuRestaurante.platosMenu,
-//   estaCargando: menuRestaurante.estaCargando
-// });
+const mapStateToProps = ({ tableroReservas }) => ({
+  estaCargando: tableroReservas.estaCargando,
+  reservas: tableroReservas.reservas
+});
 
-const mapDispatchToProps = (dispatch) => bindActionCreators(accionesTableroReservas, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators({ solicitarReservas }, dispatch);
 
-const reservasConCargando = conectarPantallaCargando(TableroReservas);
+const tableroConCargando = conectarPantallaCargando(TableroReservas);
 
-export default connect(null, mapDispatchToProps)(reservasConCargando);
+export default connect(mapStateToProps, mapDispatchToProps)(tableroConCargando);
