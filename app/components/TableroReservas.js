@@ -1,11 +1,12 @@
 // @flow
 import React, { Component } from "react";
 import FlipMove from "react-flip-move";
+import Reserva from "./Reserva";
 
 type ReservaType = {
   id: number,
   nombre: string,
-  fechaSolicitud: Date,
+  fechaReserva: Date,
   ordenes: Array<{
     id: number,
     cantidad: number,
@@ -28,13 +29,7 @@ export default class TableroReservas extends Component {
     return (
       <div>
         <FlipMove duration={500} easing="ease-out">
-          {
-            reservas.map(reserva =>
-              <div key={reserva.id}>
-                {reserva.nombre}
-              </div>
-            )
-          }
+          {reservas.map(reserva => <Reserva key={reserva.id} {...reserva} />)}
         </FlipMove>
       </div>
     );
