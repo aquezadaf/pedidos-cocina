@@ -5,10 +5,10 @@ export const CARGAR_RESERVAS = "CARGAR_RESERVAS";
 export const ERROR_SOLICITUD_RESERVAS = "ERROR_SOLICITUD_RESERVAS";
 
 const cambiarTipoFechaSolicitud = (reserva) => {
-  if (typeof reserva.fechaSolicitud === "string") {
+  if (typeof reserva.fechaReserva === "string") {
     return {
       ...reserva,
-      fechaSolicitud: new Date(reserva.fechaSolicitud)
+      fechaReserva: new Date(reserva.fechaReserva)
     };
   }
   return reserva;
