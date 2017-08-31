@@ -1,0 +1,26 @@
+.reserva {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: white;
+  font-weight: bold;
+  border: 2px solid white;
+  margin: 10px;
+  box-shadow: 2px 2px 2px gray;
+  font-size: 12px;
+  background-color: #607d8b;
+}
+
+.nombre {
+  text-align: center;
+  background-color: rgba(28, 105, 128, 0.7);
+  padding: 6px;
+}
+
+.ordenes {
+  padding: 10px;
+}
+
+.orden {
+  text-align: left;
+}

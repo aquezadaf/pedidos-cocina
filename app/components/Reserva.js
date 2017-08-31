@@ -1,7 +1,8 @@
 // @flow
 import React, { Component } from "react";
+import style from "./Reserva.css";
 
-export default class Pedido extends Component {
+export default class Reserva extends Component {
   props: {
     nombre: string,
     fechaReserva: Date,
@@ -12,16 +13,32 @@ export default class Pedido extends Component {
     }>
   };
 
+  static formatearUnidadHora(unidad) {
+    if (unidad < 10) {
+      return `0${unidad}`;
+    }
+    return unidad;
+  }
+
+  horaReserva() {
+    const { fechaReserva } = this.props;
+    const horas = Reserva.formatearUnidadHora(fechaReserva.getHours());
+    const minutos = Reserva.formatearUnidadHora(fechaReserva.getMinutes());
+    return `${horas}:${minutos}`;
+  }
+
   render() {
     const { nombre, fechaReserva, ordenes } = this.props;
+
+    console.log(fechaReserva, typeof fechaReserva);
+
     return (
-      <div>
-        <div>
-          {nombre} ({fechaReserva.toLocaleString()})
-        </div>
-        <div>
+      <div className={style.reserva}>
+        <div className={style.nombre}>{nombre}</div>
+        <div className={style.ordenes}>
+          Fecha reserva: ({this.horaReserva()})
           {ordenes.map(orden => (
-            <div key={orden.id}>
+            <div key={orden.id} className={style.orden}>
               {orden.cantidad} x {orden.nombre}
             </div>
           ))}
