@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import FlipMove from "react-flip-move";
 import Reserva from "./Reserva";
+import style from "./TableroReservas.css";
 
 type ReservaType = {
   id: number,
@@ -27,8 +28,8 @@ export default class TableroReservas extends Component {
   render() {
     const { reservas } = this.props;
     return (
-      <div>
-        <FlipMove duration={500} easing="ease-out">
+      <div className={style.tablero}>
+        <FlipMove duration={500} easing="ease-out" className={style.pedidos}>
           {reservas.map(reserva => <Reserva key={reserva.id} {...reserva} />)}
         </FlipMove>
       </div>
