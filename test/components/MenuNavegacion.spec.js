@@ -10,10 +10,10 @@ describe("Componente del Menu de Navegacion", () => {
     expect(menuEnzyme.find("div").first().hasClass("menuNavegacion"))
       .toBe(true);
   });
-  it("Menu debe contener cinco opciones", () => {
+  it("Menu debe contener 4 opciones", () => {
     const menuEnzyme = crearMenuNavegacion();
     expect(menuEnzyme.find("li").length)
-      .toBe(5);
+      .toBe(4);
   });
   it("Ninguno de las opciones del menu debe estar seleccionada", () => {
     const menuEnzyme = crearMenuNavegacion();
