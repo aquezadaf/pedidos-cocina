@@ -28,20 +28,20 @@ export default class Reserva extends Component {
   }
 
   render() {
-    const { nombre, fechaReserva, ordenes } = this.props;
-
-    console.log(fechaReserva, typeof fechaReserva);
-
+    const { nombre, ordenes } = this.props;
     return (
       <div className={style.reserva}>
         <div className={style.nombre}>{nombre}</div>
         <div className={style.ordenes}>
-          Fecha reserva: ({this.horaReserva()})
           {ordenes.map(orden => (
             <div key={orden.id} className={style.orden}>
               {orden.cantidad} x {orden.nombre}
             </div>
           ))}
+        </div>
+        <div className={style.hora}>
+          <div className={style.textoHora}>Hora Reserva</div>
+          {this.horaReserva()}
         </div>
       </div>
     );
