@@ -1,7 +1,7 @@
 .reserva {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   color: white;
   font-weight: bold;
   border: 2px solid white;
@@ -9,12 +9,6 @@
   box-shadow: 2px 2px 2px gray;
   font-size: 12px;
   background-color: #607d8b;
-}
-
-.nombre {
-  text-align: center;
-  background-color: rgba(28, 105, 128, 0.7);
-  padding: 6px;
 }
 
 .ordenes {
@@ -26,11 +20,11 @@
 }
 
 .hora {
-  background-color: rgba(5, 255, 185, 0.16);
+  background-color: rgba(5, 210, 255, 0.16);
   font-size: 16px;
   padding: 8px;
   text-align: center;
-  border-top: 2px dotted white;
+  border-bottom: 1px solid white;
 }
 
 .textoHora {

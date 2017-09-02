@@ -4,7 +4,6 @@ import style from "./Reserva.css";
 
 export default class Reserva extends Component {
   props: {
-    nombre: string,
     fechaReserva: Date,
     ordenes: Array<{
       id: number,
@@ -28,20 +27,18 @@ export default class Reserva extends Component {
   }
 
   render() {
-    const { nombre, ordenes } = this.props;
+    const { ordenes } = this.props;
     return (
       <div className={style.reserva}>
-        <div className={style.nombre}>{nombre}</div>
+        <div className={style.hora}>
+          <span className={style.textoHora}>Hora Reserva</span> {this.horaReserva()}
+        </div>
         <div className={style.ordenes}>
           {ordenes.map(orden => (
             <div key={orden.id} className={style.orden}>
               {orden.cantidad} x {orden.nombre}
             </div>
           ))}
-        </div>
-        <div className={style.hora}>
-          <div className={style.textoHora}>Hora Reserva</div>
-          {this.horaReserva()}
         </div>
       </div>
     );
