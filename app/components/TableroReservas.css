@@ -1,0 +1,10 @@
+.tablero {
+  height: 100%;
+  overflow: scroll;
+}
+
+.pedidos {
+  display: flex;
+  flex-wrap: wrap;
+  overflow: scroll;
+}
