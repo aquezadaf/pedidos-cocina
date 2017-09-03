@@ -53,3 +53,6 @@ npm-debug.log.*
 
 # vscode folder
 .vscode/
+
+# yarn file
+yarn.lock
