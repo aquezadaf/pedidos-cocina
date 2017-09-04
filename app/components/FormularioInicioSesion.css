@@ -132,6 +132,7 @@
   margin: 20px 0;
   transition: border linear 0.2s, box-shadow linear 0.2s;
   box-sizing: border-box;
+  color: white;
 }
 
 .formulario input:focus {
