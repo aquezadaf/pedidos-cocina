@@ -21,20 +21,22 @@ export default class FormularioInicioSesion extends Component {
     }
 
     return (
-      <div className={style.box}>
-        <div className={style.formulario}>
-          <div className={style.tag}>Reserva Ya!</div>
-          <div>Inicia sesión para configurar tu cocina</div>
-          <div>
-            <input type="text" id="inputName" placeholder="Usuario" />
-          </div>
-          <div>
-            <input type="password" id="inputPassword" placeholder="Contraseña" />
-          </div>
-          <div>
-            <button type="submit" className={style.btn} onClick={this.iniciarSesion}>
-              Iniciar sesión
-            </button>
+      <div className={style.contenedor}>
+        <div className={style.box}>
+          <div className={style.formulario}>
+            <div className={style.tag}>Reserva Ya!</div>
+            <div>Inicia sesión para configurar tu cocina</div>
+            <div>
+              <input type="text" id="inputName" placeholder="Usuario" />
+            </div>
+            <div>
+              <input type="password" id="inputPassword" placeholder="Contraseña" />
+            </div>
+            <div>
+              <button type="submit" className={style.btn} onClick={this.iniciarSesion}>
+                Iniciar sesión
+              </button>
+            </div>
           </div>
         </div>
       </div>
