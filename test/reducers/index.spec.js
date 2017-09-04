@@ -16,9 +16,12 @@ describe("Root reducer de la aplicacion", () => {
         estaCargando: false,
         pedidos: [],
       },
+      tableroReservas: {
+        estaCargando: false,
+        reservas: []
+      },
     };
 
-    expect(store.getState())
-      .toEqual(estadoAplicacion);
+    expect(store.getState()).toEqual(estadoAplicacion);
   });
 });

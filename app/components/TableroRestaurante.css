@@ -1,0 +1,18 @@
+.tablero {
+  display: flex;
+  height: 100%;
+}
+
+.separador {
+  flex: 1;
+  background-color: black;
+  border: 1px double white;
+}
+
+.pedidos {
+  flex: 400;
+}
+
+.reservas {
+  flex: 100;
+}
