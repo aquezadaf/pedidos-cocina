@@ -42,6 +42,7 @@
   border: 2px solid whitesmoke;
   background-color: lightgray;
   font-size: 14px;
+  box-shadow: 2px 2px 2px gray;
 }
 
 .tituloOrden {
