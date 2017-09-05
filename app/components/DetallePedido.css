@@ -1,0 +1,58 @@
+.detalle {
+  height: 100%;
+  overflow: scroll;
+}
+
+.nombre {
+  color: #3f3f3f;
+  border-bottom: 3px double #3f3f3f;
+}
+
+.botonera {
+  width: 100%;
+}
+
+.boton {
+  width: 40%;
+  padding: 10px;
+  margin: 5px;
+  color: white;
+  font-size: 12px;
+  border-radius: 5px;
+  border: 1px solid white;
+  box-shadow: 2px 2px 2px gray;
+}
+
+.botonFinalizar {
+  background-color: darkslategray;
+}
+
+.botonAnular {
+  background-color: tomato;
+}
+
+.ordenes {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.orden {
+  padding: 0;
+  margin: 10px;
+  border: 2px solid whitesmoke;
+  background-color: lightgray;
+  font-size: 14px;
+}
+
+.tituloOrden {
+  font-weight: bold;
+  text-align: center;
+  border-bottom: 2px solid white;
+  background-color: lightslategray;
+  color: white;
+  padding: 5px;
+}
+
+.detalleOrden {
+  padding: 10px;
+}
