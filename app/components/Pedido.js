@@ -36,10 +36,7 @@ export default class Pedido extends Component {
 
   clasePrioridadPedido(): string {
     const prioridad = this.prioridadEnRangoValido();
-    return [
-      style.pedido,
-      coloresPrioridades[prioridad]
-    ].join(" ");
+    return [style.pedido, coloresPrioridades[prioridad]].join(" ");
   }
 
   render() {
@@ -47,21 +44,17 @@ export default class Pedido extends Component {
     const nombreClasePedido = this.clasePrioridadPedido();
     return (
       <div className={nombreClasePedido}>
-        <Link to={`/pedido/${id}`} className={style.nombre}>
+        <Link to={`/pedidos/${id}`} className={style.nombre}>
           {nombre}
         </Link>
         <div className={style.ordenes}>
-          {
-            ordenes.map((orden) => (
-              <div key={orden.id} className={style.orden}>
-                {orden.cantidad} x {orden.nombre}
-              </div>
-            ))
-          }
+          {ordenes.map(orden => (
+            <div key={orden.id} className={style.orden}>
+              {orden.cantidad} x {orden.nombre}
+            </div>
+          ))}
         </div>
-        <div className={style.fecha}>
-          {fechaSolicitud.toLocaleString()}
-        </div>
+        <div className={style.fecha}>{fechaSolicitud.toLocaleString()}</div>
       </div>
     );
   }
