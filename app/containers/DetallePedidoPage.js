@@ -1,4 +1,4 @@
-import DetallePedido from "../components/DetallePedido";
+import DetalleElemento from "../components/DetalleElemento";
 
 const pedido = {
   id: 16,
@@ -108,4 +108,4 @@ const pedido = {
   ],
 };
 
-export default () => DetallePedido(pedido);
+export default () => DetalleElemento(pedido);

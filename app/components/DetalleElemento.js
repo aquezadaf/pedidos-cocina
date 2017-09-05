@@ -1,5 +1,5 @@
 import React from "react";
-import style from "./DetallePedido.css";
+import style from "./DetalleElemento.css";
 
 type Props = {
   nombre: string,
