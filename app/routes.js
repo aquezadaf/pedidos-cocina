@@ -6,7 +6,7 @@ import TableroRestaurantePage from "./containers/TableroRestaurantePage";
 import TableroPedidosPage from "./containers/TableroPedidosPage";
 import TableroReservasPage from "./containers/TableroReservasPage";
 import MenuRestaurantePage from "./containers/MenuRestaurantePage";
-import DetallePedido from "./components/DetallePedido";
+import DetallePedidoPage from "./containers/DetallePedidoPage";
 
 export default () => (
   <Switch>
@@ -16,7 +16,7 @@ export default () => (
       <Route exact path="/reservas" component={TableroReservasPage} />
       <Route exact path="/menu" component={MenuRestaurantePage} />
       <Route exact path="/pedidos" component={TableroPedidosPage} />
-      <Route exact path="/pedidos/:id" component={DetallePedido} />
+      <Route exact path="/pedidos/:id" component={DetallePedidoPage} />
     </App>
   </Switch>
 );
